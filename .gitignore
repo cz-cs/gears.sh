@@ -1,0 +1,37 @@
+node_modules/
+
+# build
+.output
+.vercel
+.netlify
+.wrangler
+.svelte-kit/
+build/
+
+# os
+.DS_Store
+Thumbs.db
+
+# env
+.env
+.env.*
+!.env.example
+!.env.test
+
+# vite
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+
+# lockfiles
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
+bun.lockb
+deno.lock
+
+# editors
+.vscode/
+.idea/
+
+# Paraglide
+src/lib/paraglide
