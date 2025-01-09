@@ -14,5 +14,5 @@ export const load: PageServerLoad = async ({ fetch, locals }) => {
     team: [session.prefs.team]
   });
 
-  return { events: res as Promise<Paginated<Event>> };
+  return { events: res as Promise<Paginated<Event>>, nickname: session.prefs.nickname };
 };
