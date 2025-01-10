@@ -6,7 +6,7 @@ import {
 import { redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from '../signin/$types';
 import { createAdminClient, createSessionClient } from '$lib/server/appwrite';
-import { Account, Databases, ID, Users } from 'node-appwrite';
+import * as Appwrite from 'node-appwrite';
 import { Teams } from '$lib/robotevents/api';
 
 export const load: PageServerLoad = async ({ cookies }) => {
@@ -18,11 +18,11 @@ export const actions: Actions = {
     let data = await request.formData();
 
     let adminClient = createAdminClient();
-    let account = new Account(adminClient);
-    let db = new Databases(adminClient);
+    let account = new Appwrite.Account(adminClient);
+    let db = new Appwrite.Databases(adminClient);
 
     await account.create(
-      `${data.get('username')}`,
+      Appwrite.ID.unique(),
       `${data.get('email')}`,
       `${data.get('password')}`,
       `${data.get('display_name')}`
@@ -32,24 +32,40 @@ export const actions: Actions = {
       `${data.get('email')}`,
       `${data.get('password')}`
     );
-    let doc = await db.createDocument(PUBLIC_DATABASE, PUBLIC_USERNAMESCOLLECTION, ID.unique(), {
-      username: `${data.get('username')}`,
-      id: session.userId
-    });
 
     cookies.set(PUBLIC_SESSIONCOOKIE, session.secret, {
       path: '/',
       expires: new Date(session.expire)
     });
 
-    let sessionClient = createSessionClient(cookies);
-    let userAcc = new Account(sessionClient);
-
     let team = await Teams({ number: [`${data.get('team')}`] });
+    let doc = await db.createDocument(
+      PUBLIC_DATABASE,
+      PUBLIC_USERNAMESCOLLECTION,
+      Appwrite.ID.unique(),
+      {
+        username: `${data.get('username')}`,
+        id: session.userId
+      }
+    );
+
+    try {
+      let teams = new Appwrite.Teams(adminClient);
+      let t = await teams.get(team!.data[0].id.toString());
+
+      let membership = await teams.createMembership(t.$id, [], undefined, session.userId);
+
+      await teams.updateMembershipStatus(t.$id, membership.$id, session.userId, 'secret');
+    } catch {
+      return;
+    }
+
+    let sessionClient = createSessionClient(cookies);
+    let userAcc = new Appwrite.Account(sessionClient);
 
     await userAcc.updatePrefs({
-      team: team?.data[0].id,
-      usernameId: doc.$id
+      usernameId: doc.$id,
+      name: `${data.get('nickname')}`
     });
 
     redirect(303, '/');
