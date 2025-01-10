@@ -1,6 +1,6 @@
 import { PUBLIC_SESSIONCOOKIE } from '$env/static/public';
 import { fail, redirect } from '@sveltejs/kit';
-import type { Actions, PageServerLoad } from '../../../(auth)/signin/$types';
+import type { Actions, PageServerLoad } from './$types';
 import { createAdminClient } from '$lib/server/appwrite';
 import { Account } from 'node-appwrite';
 
@@ -26,7 +26,8 @@ export const actions: Actions = {
       });
     }
     cookies.set(PUBLIC_SESSIONCOOKIE, session.secret, {
-      path: '/'
+      path: '/',
+      expires: new Date(session.expire)
     });
     redirect(303, '/');
   }

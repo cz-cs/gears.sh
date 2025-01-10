@@ -65,7 +65,7 @@
       out:fly={{ x: prefersReducedMotion.current ? 0 : -10, duration: 125 }}
     >
       <p class="px-2 py-1.5 text-sm font-semibold">
-        {m.even_caring_rook_charm({ user: page.data.nickname })}
+        {m.even_caring_rook_charm({ user: page.data.name })}
       </p>
       <div aria-orientation="horizontal" class="-mx-1 my-1 h-px bg-zinc-800"></div>
       <div role="group" class="w-full text-sm">
