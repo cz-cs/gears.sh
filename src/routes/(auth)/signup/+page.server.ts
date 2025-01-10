@@ -56,9 +56,7 @@ export const actions: Actions = {
       let membership = await teams.createMembership(t.$id, [], undefined, session.userId);
 
       await teams.updateMembershipStatus(t.$id, membership.$id, session.userId, 'secret');
-    } catch {
-      return;
-    }
+    } catch {}
 
     let sessionClient = createSessionClient(cookies);
     let userAcc = new Appwrite.Account(sessionClient);

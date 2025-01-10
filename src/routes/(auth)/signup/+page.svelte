@@ -252,7 +252,7 @@
   <input hidden name="password" bind:value={data[3]} />
   <input hidden name="team" bind:value={data[4]} />
   <input hidden name="name" bind:value={data[5]} />
-  <input hidden name="private" type="checkbox" bind:value={privateToggle} />
+  <input hidden name="private" type="checkbox" bind:checked={privateToggle} />
 </form>
 {#if false}
   <div in:fly={{ x: 15 }}>
