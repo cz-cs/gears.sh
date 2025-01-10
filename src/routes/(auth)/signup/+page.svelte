@@ -6,19 +6,23 @@
   import Button from '$lib/components/button/Primary.svelte';
 
   import { fly, slide } from 'svelte/transition';
-  import Input from '../components/Input.svelte';
+  import Input from '$lib/components/form/Input.svelte';
 
   import OutlineButton from '$lib/components/button/Outline.svelte';
   import type { ActionData } from './$types';
+  import { type Team } from '$lib/robotevents/schemas/Team';
 
   let loading = $state(false);
 
-  let page = $state(0);
+  let page = $state(3);
 
   let data = $state(['', '', '', '', '']);
 
   let alert = $state(false);
   let privateToggle = $state(true);
+
+  let team = $state('type in the input above');
+  let program = $state('');
 
   let { form }: { form: ActionData } = $props();
 </script>
@@ -26,44 +30,46 @@
 <svelte:head>
   <title>Sign up - gears</title>
 </svelte:head>
-<div class="mx-4 my-auto sm:mx-auto">
+<div class="my-auto w-full px-12 lg:w-1/2">
   {#if page === 0}
     <a
       class="absolute top-4 right-4 inline-flex h-9 items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-zinc-900 focus-visible:ring focus-visible:outline-none disabled:pointer-events-none md:top-8 md:right-8"
-      href="/signin">Login</a
+      href="/signin">{m.caring_few_pony_pop()}</a
     >
     <div>
-      <div class="text-center">
-        <h1 class="text-2xl font-bold">Create an account</h1>
-        <h2 class="mt-1 mb-6 text-sm text-zinc-400">
-          An account unlocks chat, forums, personalized home page, and timers/manuals
+      <div class="space-y-2 text-center">
+        <h1 class="text-2xl font-bold">{m.tired_direct_maggot_sew()}</h1>
+        <h2 class="mb-6 text-sm text-zinc-400">
+          {m.royal_empty_lizard_jest()}
         </h2>
       </div>
-      <Input
-        disabled={loading}
-        placeholder="Email"
-        bind:value={data[2]}
-        error={alert}
-        type="email"
-      />
-      <Input
-        disabled={loading}
-        placeholder="Password"
-        bind:value={data[3]}
-        error={alert}
-        type="password"
-      />
-      <Button
-        extraProps="w-full"
-        onclick={() => {
-          if (data[2] && data[3]) page++;
-          alert = true;
-          setTimeout(() => (alert = false), 1000);
-        }}
-        disabled={loading}
-        ><BlockSpinner active={loading} size={4} fill="#09090b" />
-        <p data-loading={loading} class="visible data-[loading=true]:hidden">Continue</p></Button
-      >
+      <div class="space-y-2 *:w-full">
+        <!-- ONLY time non atomic css is good -->
+        <Input
+          disabled={loading}
+          placeholder={m.jolly_icy_newt_shine()}
+          bind:value={data[2]}
+          error={alert}
+          type="email"
+        />
+        <Input
+          disabled={loading}
+          placeholder={m.lucky_noisy_pony_endure()}
+          bind:value={data[3]}
+          error={alert}
+          type="password"
+        />
+        <Button
+          extraProps="w-full"
+          onclick={() => {
+            if (data[2] && data[3]) page++;
+            alert = true;
+            setTimeout(() => (alert = false), 1000);
+          }}
+        >
+          <p>{m.jolly_close_jellyfish_forgive()}</p></Button
+        >
+      </div>
       {#if false}
         <!-- i'll try to make oauth later, google cloud is stinky -->
         <div transition:slide={{ axis: 'y' }}>
@@ -122,12 +128,14 @@
     </div>
   {:else if page === 1}
     <div in:fly={{ x: 15 }}>
-      <div class="text-center">
+      <div class="space-y-2 text-center">
         <h1 class="text-2xl font-bold">{m.tangy_swift_thrush_fulfill()}</h1>
-        <p class="mb-2 text-sm text-zinc-400">{m.known_inner_mule_conquer()}</p>
-        <p class="mb-3 text-sm text-zinc-400">{m.super_low_peacock_advise()}</p>
+        <p class="mb-6 text-sm text-zinc-400">
+          {m.known_inner_mule_conquer()}
+          {m.super_low_peacock_advise()}
+        </p>
       </div>
-      <div class="space-y-3">
+      <div class="w-full space-y-2 *:w-full">
         <Button
           disabled={loading}
           onclick={() => {
@@ -137,7 +145,7 @@
           {m.antsy_sea_meerkat_talk()}
         </Button>
         <Button
-          disabled={loading}
+          disabled={true}
           onclick={() => {
             page++;
           }}
@@ -145,7 +153,7 @@
           {m.bland_each_herring_gleam()}
         </Button>
         <Button
-          disabled={loading}
+          disabled={true}
           onclick={() => {
             page++;
           }}
@@ -156,15 +164,15 @@
     </div>
   {:else if page === 2}
     <div in:fly={{ x: 15 }}>
-      <div class="text-center">
-        <h1 class="text-2xl font-bold">{m.active_this_gorilla_compose()}</h1>
-        <p class="mb-6 text-sm text-zinc-400">{m.crisp_quiet_frog_chop()}</p>
+      <h1 class="mb-6 text-center text-2xl font-bold">{m.active_this_gorilla_compose()}</h1>
+      <div class="space-y-2 *:w-full">
+        <Input bind:value={data[0]} placeholder="@" />
+        <Input bind:value={data[1]} placeholder={m.tangy_good_llama_slide()} />
+        <Input bind:value={data[4]} placeholder={m.honest_stale_owl_build()} />
       </div>
-      <Input bind:value={data[0]} placeholder="@" oninput={() => {}} />
-      <Input bind:value={data[1]} placeholder={m.tangy_good_llama_slide()} />
       <div class="my-6 h-px bg-zinc-800"></div>
       <div
-        class="mb-3 flex items-center justify-between gap-4 rounded-md border border-zinc-800 px-4 py-2 text-xs font-medium"
+        class="mb-2 flex items-center justify-between gap-4 rounded-md border border-zinc-800 px-4 py-2 text-xs font-medium"
       >
         {m.cuddly_lost_insect_sway()}
         <button
@@ -179,33 +187,46 @@
           ></div>
         </button>
       </div>
-      <Button
-        disabled={loading}
-        onclick={() => {
-          page++;
-        }}
-      >
-        <p>{m.curly_blue_raven_pout()} ({m.mild_wise_badger_embrace()})</p></Button
+      <Button extraProps="w-full" onclick={() => page++}>
+        <p>{m.curly_blue_raven_pout()}</p></Button
       >
     </div>
   {:else if page === 3}
-    <form action="?/team" id="teamform">
+    {@const special = /[$&+,:;=?@#|'<>.^*()%!-]/}
+    <form action="?/team" id="teamform" oninput={(e) => e.currentTarget.requestSubmit()}>
       <input aria-hidden="true" hidden name="team_number" bind:value={data[4]} />
     </form>
     <div in:fly={{ x: 15 }}>
-      <div class="text-center">
+      <div class="mb-6 space-y-2 text-center">
         <h1 class="text-2xl font-bold">{m.mild_wise_badger_embrace()}</h1>
-        <p class="mb-4 text-sm text-zinc-400">{m.happy_best_flamingo_lend()}</p>
+        <p class="text-sm text-zinc-400">{m.happy_best_flamingo_lend()}</p>
       </div>
       <Input
         placeholder="Team number"
-        extraProps="uppercase"
-        form="teamform"
+        extraProps="uppercase placeholder:normal-case w-full mb-1"
+        oninput={async (e) => {
+          program = '';
+          team = 'searching for that team...';
+          let res = await fetch(`/api/team?n=${data[4]}`);
+          if (!res.ok) {
+            program = 'not found';
+            team = "we couldn't find that team";
+            return;
+          }
+          let t = await res.json();
+          program = t.program;
+          team = `${t.number} - ${t.name}: ${t.members === 0 ? 'you are the 1st in gears' : `${t.members} members`}`;
+        }}
         bind:value={data[4]}
       />
-      <div class="mb-3 flex gap-3 opacity-50">
+      <div
+        data-active={team === 'searching for that team...'}
+        data-iq={program.includes('IQ')}
+        data-v5={program.includes('V5') || program.includes('U') || program === 'not found'}
+        class="mb-3 flex gap-3 text-zinc-400 data-[active=true]:animate-pulse data-[iq=true]:text-blue-400 data-[v5=true]:text-red-400"
+      >
         <BlockSpinner active={loading} fill="#FAFAFA" size={16} />
-        <p class="text-xs font-medium">searching for that team...</p>
+        <p class="text-xs font-medium">{team}</p>
       </div>
       <Button form="form" extraProps="w-full"
         ><BlockSpinner active={false} size={4} fill="#09090b" />
@@ -230,6 +251,7 @@
   <input hidden name="email" bind:value={data[2]} />
   <input hidden name="password" bind:value={data[3]} />
   <input hidden name="team" bind:value={data[4]} />
+  <input hidden name="nickname" bind:value={data[5]} />
   <input hidden name="private" type="checkbox" bind:checked={privateToggle} />
 </form>
 {#if false}
