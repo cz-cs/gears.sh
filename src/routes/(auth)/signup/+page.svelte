@@ -10,18 +10,17 @@
 
   import OutlineButton from '$lib/components/button/Outline.svelte';
   import type { ActionData } from './$types';
-  import { type Team } from '$lib/robotevents/schemas/Team';
 
   let loading = $state(false);
 
-  let page = $state(3);
+  let page = $state(0);
 
   let data = $state(['', '', '', '', '']);
 
   let alert = $state(false);
   let privateToggle = $state(true);
 
-  let team = $state('type in the input above');
+  let team = $state(m.same_each_puffin_enchant());
   let program = $state('');
 
   let { form }: { form: ActionData } = $props();
@@ -202,25 +201,25 @@
         <p class="text-sm text-zinc-400">{m.happy_best_flamingo_lend()}</p>
       </div>
       <Input
-        placeholder="Team number"
+        placeholder={m.fit_dull_frog_treasure()}
         extraProps="uppercase placeholder:normal-case w-full mb-1"
         oninput={async (e) => {
           program = '';
-          team = 'searching for that team...';
+          team = m.few_tasty_antelope_pray();
           let res = await fetch(`/api/team?n=${data[4]}`);
           if (!res.ok) {
             program = 'not found';
-            team = "we couldn't find that team";
+            team = m.north_every_gorilla_race();
             return;
           }
           let t = await res.json();
           program = t.program;
-          team = `${t.number} - ${t.name}: ${t.members === 0 ? 'you are the 1st in gears' : `${t.members} members`}`;
+          team = `${t.number} - ${t.name}: ${t.members === 0 ? m.awful_deft_panther_startle() : m.north_day_guppy_treasure({ members: t.members })}`;
         }}
         bind:value={data[4]}
       />
       <div
-        data-active={team === 'searching for that team...'}
+        data-active={team === m.few_tasty_antelope_pray()}
         data-iq={program.includes('IQ')}
         data-v5={program.includes('V5') || program.includes('U') || program === 'not found'}
         class="mb-3 flex gap-3 text-zinc-400 data-[active=true]:animate-pulse data-[iq=true]:text-blue-400 data-[v5=true]:text-red-400"
@@ -230,7 +229,7 @@
       </div>
       <Button form="form" extraProps="w-full"
         ><BlockSpinner active={false} size={4} fill="#09090b" />
-        <p>Finish & create account</p></Button
+        <p>{m.gaudy_tame_moth_embrace()}</p></Button
       >
     </div>
   {/if}
