@@ -65,7 +65,7 @@ export const actions: Actions = {
 
     await userAcc.updatePrefs({
       usernameId: doc.$id,
-      name: `${data.get('nickname')}`
+      name: `${data.get('name')}`
     });
 
     redirect(303, '/');
