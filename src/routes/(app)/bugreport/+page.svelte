@@ -41,6 +41,7 @@
 </Container>
 <form
   id="form"
+  autocomplete="off"
   method="POST"
   use:enhance={async () => {
     submitting = true;
