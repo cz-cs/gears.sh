@@ -224,11 +224,10 @@
         data-v5={program.includes('V5') || program.includes('U') || program === 'not found'}
         class="mb-3 flex gap-3 text-zinc-400 data-[active=true]:animate-pulse data-[iq=true]:text-blue-400 data-[v5=true]:text-red-400"
       >
-        <BlockSpinner active={loading} fill="#FAFAFA" size={16} />
         <p class="text-xs font-medium">{team}</p>
       </div>
       <Button form="form" extraProps="w-full"
-        ><BlockSpinner active={false} size={4} fill="#09090b" />
+        ><BlockSpinner active={loading} size={4} fill="#09090b" />
         <p>{m.gaudy_tame_moth_embrace()}</p></Button
       >
     </div>
