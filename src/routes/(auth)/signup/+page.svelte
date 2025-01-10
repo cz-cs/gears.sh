@@ -16,13 +16,9 @@
   let page = $state(0);
 
   let data = $state(['', '', '', '', '']);
-  // let oauth = $derived(data[2] !== '' || data[3] !== '');
-  let oauth = $state(false);
+
   let alert = $state(false);
   let privateToggle = $state(true);
-
-  let open = $state(false);
-  let option = $state('');
 
   let { form }: { form: ActionData } = $props();
 </script>
@@ -43,8 +39,6 @@
           An account unlocks chat, forums, personalized home page, and timers/manuals
         </h2>
       </div>
-      <Input disabled={loading} placeholder="Username" bind:value={data[0]} error={alert} />
-      <Input disabled={loading} placeholder="Display name" bind:value={data[1]} error={alert} />
       <Input
         disabled={loading}
         placeholder="Email"
@@ -59,14 +53,8 @@
         error={alert}
         type="password"
       />
-      <Input
-        disabled={loading}
-        placeholder="Team number (12345X)"
-        bind:value={data[4]}
-        error={alert}
-      />
-      <!--
       <Button
+        extraProps="w-full"
         onclick={() => {
           if (data[2] && data[3]) page++;
           alert = true;
@@ -76,19 +64,15 @@
         ><BlockSpinner active={loading} size={4} fill="#09090b" />
         <p data-loading={loading} class="visible data-[loading=true]:hidden">Continue</p></Button
       >
-      -->
-      <Button form="form" disabled={loading}
-        ><BlockSpinner active={loading} size={4} fill="#09090b" />
-        <p data-loading={loading} class="visible data-[loading=true]:hidden">Continue</p></Button
-      >
       {#if false}
+        <!-- i'll try to make oauth later, google cloud is stinky -->
         <div transition:slide={{ axis: 'y' }}>
           <div class="my-6 flex items-center gap-2">
             <div class="h-px w-full bg-zinc-800"></div>
             <p class="text-xs text-nowrap text-zinc-400">OR</p>
             <div class="h-px w-full bg-zinc-800"></div>
           </div>
-          <div class="space-y-3">
+          <div class="flex flex-col space-y-3">
             <Button disabled={loading}>
               <svg
                 class="size-4"
