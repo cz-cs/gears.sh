@@ -66,7 +66,7 @@ export const actions: Actions = {
     await userAcc.updatePrefs({
       usernameId: doc.$id,
       name: `${data.get('name')}`,
-      private: `${data.get('private')}`
+      private: Boolean(`${data.get('private')}`)
     });
 
     redirect(303, '/');

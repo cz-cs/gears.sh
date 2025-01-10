@@ -15,7 +15,7 @@
 
   let page = $state(0);
 
-  let data = $state(['', '', '', '', '']);
+  let data = $state(['', '', '', '', '', '']);
 
   let alert = $state(false);
   let privateToggle = $state(true);
@@ -167,7 +167,7 @@
       <div class="space-y-2 *:w-full">
         <Input bind:value={data[0]} placeholder="@" />
         <Input bind:value={data[1]} placeholder={m.tangy_good_llama_slide()} />
-        <Input bind:value={data[4]} placeholder={m.honest_stale_owl_build()} />
+        <Input bind:value={data[5]} placeholder={m.honest_stale_owl_build()} />
       </div>
       <div class="my-6 h-px bg-zinc-800"></div>
       <div
@@ -237,6 +237,7 @@
 <form
   id="form"
   method="POST"
+  autocomplete="off"
   use:enhance={({}) => {
     loading = true;
     return async ({ update }) => {
@@ -251,7 +252,7 @@
   <input hidden name="password" bind:value={data[3]} />
   <input hidden name="team" bind:value={data[4]} />
   <input hidden name="name" bind:value={data[5]} />
-  <input hidden name="private" type="checkbox" bind:checked={privateToggle} />
+  <input hidden name="private" type="checkbox" bind:value={privateToggle} />
 </form>
 {#if false}
   <div in:fly={{ x: 15 }}>
