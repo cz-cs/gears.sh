@@ -128,10 +128,10 @@
             </div>
           </div>
           <Button disabled={submitting} form="name"
-            >Save changes<BlockSpinner active={submitting} fill="09090b" size={16} /></Button
+            >Save changes<BlockSpinner active={submitting} fill="#fafafa" /></Button
           >
         </div>
-        <div role="separator" class="my-3 h-px bg-zinc-800"></div>
+        <div role="separator" class="my-3 h-px bg-zinc-200 dark:bg-zinc-800"></div>
         <div class="space-y-2">
           <form
             method="post"
@@ -159,17 +159,17 @@
             <div class="flex gap-2">
               <Input disabled={submitting} placeholder="Email..." bind:value={email} />
               <Button disabled={submitting} form="email"
-                >Update<BlockSpinner active={submitting} fill="09090b" size={16} /></Button
+                >Update<BlockSpinner active={submitting} fill="#fafafa" /></Button
               >
             </div>
           </div>
         </div>
-        <div role="separator" class="my-3 h-px bg-zinc-800"></div>
+        <div role="separator" class="my-3 h-px bg-zinc-200 dark:bg-zinc-800"></div>
         <p class="text-xs font-medium text-zinc-400">
           More settings coming soon, including changing password. If you forgot your password, email
           me@czcs.xyz
         </p>
-        <div role="separator" class="my-3 h-px bg-zinc-800"></div>
+        <div role="separator" class="my-3 h-px bg-zinc-200 dark:bg-zinc-800"></div>
         <button
           onclick={() => (showSignout = true)}
           class="inline-flex h-9 cursor-pointer items-center gap-2 rounded-md bg-red-950 px-4 py-2 text-xs font-medium text-red-50 shadow-sm ring-red-50 transition-all hover:bg-red-900 focus-visible:ring focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"

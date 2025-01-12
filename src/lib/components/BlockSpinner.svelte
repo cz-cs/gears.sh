@@ -1,10 +1,11 @@
 <script lang="ts">
-  let { size, fill, active }: { size: number; fill?: string; active: boolean } = $props();
+  let { size = 4, fill, active }: { size?: number; fill?: string; active: boolean } = $props();
 </script>
 
 <svg
   data-visible={active}
-  class="size-{size} fill-zinc-950 data-[visible=false]:hidden data-[visible=true]:visible dark:fill-zinc-50"
+  class="size-{size} {fill ? `fill-${fill}` : 'fill-zinc-950 dark:fill-zinc-50'}
+  data-[visible=false]:hidden data-[visible=true]:visible"
   viewBox={`0 0 24 24`}
   xmlns="http://www.w3.org/2000/svg"
   ><style>
