@@ -169,9 +169,9 @@
         <Input bind:value={data[1]} placeholder={m.tangy_good_llama_slide()} />
         <Input bind:value={data[5]} placeholder={m.honest_stale_owl_build()} />
       </div>
-      <div class="my-6 h-px bg-zinc-800"></div>
+      <div class="my-6 h-px bg-zinc-200 dark:bg-zinc-800"></div>
       <div
-        class="mb-2 flex items-center justify-between gap-4 rounded-md border border-zinc-800 px-4 py-2 text-xs font-medium"
+        class="mb-2 flex items-center justify-between gap-4 rounded-md border border-zinc-200 px-4 py-2 text-xs font-medium dark:border-zinc-800"
       >
         {m.cuddly_lost_insect_sway()}
         <button
@@ -221,7 +221,7 @@
       <div
         data-active={team === m.few_tasty_antelope_pray()}
         data-iq={program.includes('IQ')}
-        data-v5={program.includes('V5') || program.includes('U') || program === 'not found'}
+        data-v5={program.includes('V5') || program.includes('U')}
         class="mb-3 flex gap-3 text-zinc-400 data-[active=true]:animate-pulse data-[iq=true]:text-blue-400 data-[v5=true]:text-red-400"
       >
         <p class="text-xs font-medium">{team}</p>

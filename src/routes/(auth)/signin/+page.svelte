@@ -9,7 +9,7 @@
 
   import { fly } from 'svelte/transition';
   import type { ActionData } from './$types';
-  import Input from '../components/Input.svelte';
+  import Input from '$lib/components/form/Input.svelte';
   let loading = $state(false);
   let { form }: { form: ActionData } = $props();
 </script>
@@ -45,8 +45,10 @@
       };
     }}
   >
-    <Input name="email" type="email" placeholder={m.jolly_icy_newt_shine()} />
-    <Input name="password" type="password" placeholder={m.lucky_noisy_pony_endure()} />
+    <div class="mb-2 space-y-2 *:w-full">
+      <Input name="email" type="email" placeholder={m.jolly_icy_newt_shine()} />
+      <Input name="password" type="password" placeholder={m.lucky_noisy_pony_endure()} />
+    </div>
     <Button disabled={loading} extraProps="w-full justify-center"
       ><BlockSpinner active={loading} size={4} fill="#09090b" />
       <p data-loading={loading} class="visible data-[loading=true]:hidden">
