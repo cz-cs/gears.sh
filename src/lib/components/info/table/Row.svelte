@@ -6,7 +6,7 @@
 
 <tr
   data-sveltekit-preload-code={true}
-  class="cursor-pointer border-b border-zinc-800 transition-colors hover:bg-zinc-800"
+  class="cursor-pointer border-b border-zinc-200 transition-colors hover:bg-zinc-100 dark:border-zinc-800 dark:hover:bg-zinc-800"
   onclick={() => goto(`/teams/${team.id}`)}
 >
   <td class="p-2 align-middle font-medium">{team.number}</td>
