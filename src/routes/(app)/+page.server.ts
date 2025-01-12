@@ -11,12 +11,12 @@ export const load: PageServerLoad = async ({ fetch, locals }) => {
   let session = await account.get();
 
   let teams = await team.list([], undefined);
-  console.log(Number.parseInt(teams.teams[0].$id));
 
   let res = Events({
     start: new Date(Date.now()).toISOString(),
+    end: new Date(Date.now() + 86400000).toISOString(),
     season: [189],
-    team: [Number.parseInt(teams.teams[0].$id)]
+    team: [parseInt(teams.teams[0].$id)]
   });
 
   return { events: res as Promise<Paginated<Event>>, nickname: session.prefs.name };
