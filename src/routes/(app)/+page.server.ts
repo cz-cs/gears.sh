@@ -14,7 +14,6 @@ export const load: PageServerLoad = async ({ fetch, locals }) => {
 
   let res = Events({
     start: new Date(Date.now()).toISOString(),
-    end: new Date(Date.now() + 86400000).toISOString(),
     season: [189],
     team: [parseInt(teams.teams[0].$id)]
   });
