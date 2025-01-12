@@ -15,7 +15,7 @@
 </script>
 
 <a
-  class="flex flex-col gap-1 rounded-lg border border-zinc-800 bg-zinc-950 p-3 text-sm transition-colors duration-300 hover:bg-zinc-900"
+  class="flex flex-col gap-1 rounded-lg border border-zinc-200 p-3 text-sm shadow transition-colors duration-300 hover:bg-zinc-900"
   href="/events/{event.id}"
 >
   <p class="font-medium">
@@ -32,7 +32,7 @@
         {/if}
       </p>
     </div>
-    <div role="separator" class="w-px shrink-0 bg-zinc-800"></div>
+    <div role="separator" class="w-px shrink-0 bg-zinc-200"></div>
     <div class="flex items-center gap-1">
       <MapPin />
       <p class="text-xs">
