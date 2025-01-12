@@ -15,7 +15,7 @@
 </script>
 
 <a
-  class="flex flex-col gap-1 rounded-lg border border-zinc-200 p-3 text-sm shadow transition-colors duration-300 hover:bg-zinc-900"
+  class="flex flex-col gap-1 rounded-lg border border-zinc-200 p-3 text-sm shadow transition-colors duration-300 hover:bg-zinc-900 dark:border-zinc-800"
   href="/events/{event.id}"
 >
   <p class="font-medium">

@@ -19,7 +19,7 @@
   dayjs.extend(LocalizedFormat);
 </script>
 
-<div class="min-h-full bg-zinc-50 text-zinc-950 antialiased dark:bg-zinc-950 dark:text-zinc-950">
+<div class="min-h-full bg-zinc-50 text-zinc-950 antialiased dark:bg-zinc-950 dark:text-zinc-50">
   <div class="flex">
     <SideNav />
     {#if navigating.to}
