@@ -27,6 +27,8 @@
   },
   "dependencies": {
     "@inlang/paraglide-sveltekit": "^0.11.1",
+    "@vercel/analytics": "^1.4.1",
+    "@vercel/speed-insights": "^1.1.0",
     "dayjs": "^1.11.13",
     "node-appwrite": "^14.1.0"
   }
