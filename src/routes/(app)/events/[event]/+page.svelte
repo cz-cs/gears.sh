@@ -63,12 +63,8 @@
           {/if}
         </Content>
         <Subtitle>
-          {#if spansTime}
-            {#if now.isAfter(start) && now.isBefore(end)}
-              ends {end.fromNow()}
-            {:else}
-              {start.fromNow()}
-            {/if}
+          {#if spansTime && now.isAfter(start) && now.isBefore(end)}
+            ends {end.fromNow()}
           {:else}
             {start.fromNow()}
           {/if}
