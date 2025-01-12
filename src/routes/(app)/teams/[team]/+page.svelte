@@ -24,7 +24,7 @@
 </script>
 
 <svelte:head>
-  <title>Team details - gearsHQ</title>
+  <title>Team details - gears</title>
 </svelte:head>
 {#await data.team}
   <PageSkeleton />

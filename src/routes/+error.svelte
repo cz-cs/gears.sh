@@ -19,7 +19,7 @@
       <p class="text-sm">
         Congrats, you've caught an ultra-rare error. Please report this over at our <a
           class="font-medium underline-offset-4 hover:underline"
-          href="https://github.com/gearshq/gearshq.tv">Github.</a
+          href="https://github.com/cz-cs/gears.sh">Github.</a
         >
       </p>
     {/if}

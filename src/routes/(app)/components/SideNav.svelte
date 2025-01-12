@@ -93,7 +93,7 @@
       <div role="group" class="w-full text-xs text-zinc-400">
         <p class="inline-block w-full rounded-xs px-2 py-1.5">
           {m.wise_sweet_swan_shine()}
-          <Link href="https://github.com/gearshq/web">GitHub</Link>
+          <Link href="https://github.com/cz-cs/gears.sh">GitHub</Link>
         </p>
         <p class="inline-block w-full rounded-xs px-2 py-1.5">
           {m.close_aloof_cobra_foster()}

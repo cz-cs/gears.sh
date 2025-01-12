@@ -5,14 +5,14 @@
 </script>
 
 <svelte:head>
-  <title>Hi! - gearsHQ</title>
+  <title>Hi! - gears</title>
 </svelte:head>
-<div class="h-screen font-default text-primary antialiased dark:bg-zinc-950 dark:text-white">
+<div class="font-default text-primary h-screen antialiased dark:bg-zinc-950 dark:text-white">
   <div class="flex h-full flex-col items-center justify-center backdrop-blur-md">
     <div class="mb-8 text-center">
       <h1 class="text-default text-7xl font-bold">Hi!</h1>
       <div class="text-md text-zinc-400">
-        <p>I'm SO excited you want to use gearsHQ!</p>
+        <p>I'm SO excited you want to use gears!</p>
         <p>
           Unfortunately, it's a relatively new service, and with new things, often there are tons of
           issues that still need to be ironed out before it can be labeled as "functional".
@@ -40,7 +40,7 @@
       </div>
       <button
         disabled={loading}
-        class="flex items-center justify-center gap-2 rounded-lg pl-2 pr-4 text-center text-white transition-all hover:bg-white/85 dark:bg-white dark:text-black"
+        class="flex items-center justify-center gap-2 rounded-lg pr-4 pl-2 text-center text-white transition-all hover:bg-white/85 dark:bg-white dark:text-black"
       >
         <BlockSpinner size={16} fill="white" active={loading} />
         <p class="text-center">Submit</p>

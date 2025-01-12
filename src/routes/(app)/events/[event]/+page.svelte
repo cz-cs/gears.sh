@@ -29,7 +29,7 @@
 </script>
 
 <svelte:head>
-  <title>Event details - gearsHQ</title>
+  <title>Event details - gears</title>
 </svelte:head>
 {#await data.event}
   <PageSkeleton />
@@ -53,7 +53,7 @@
       <Card
         heading={m.east_icy_gecko_buzz()}
         icon={CalendarDays}
-        href={`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${event.name}&dates=${new Date(event.start!).toISOString().replace(/(?:T.*)|(?:[-])/g, '')}/${new Date(event.end!).toISOString().replace(/(?:T.*)|(?:[-])/g, '')}&location=${event.location.address_1}, ${event.location.city}&sprop=website:gearshq.tv/events/${event.id}&sprop=name:gearsHQ`}
+        href={`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${event.name}&dates=${new Date(event.start!).toISOString().replace(/(?:T.*)|(?:[-])/g, '')}/${new Date(event.end!).toISOString().replace(/(?:T.*)|(?:[-])/g, '')}&location=${event.location.address_1}, ${event.location.city}&sprop=website:gears.sh/events/${event.id}&sprop=name:gears`}
       >
         <Content>
           {#if spansTime}
