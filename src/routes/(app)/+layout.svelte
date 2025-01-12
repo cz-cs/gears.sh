@@ -15,40 +15,17 @@
 
   let { children } = $props();
 
-  let worldsDismissed = $state(true);
-
   dayjs.locale(languageTag());
   dayjs.extend(LocalizedFormat);
 </script>
 
-<div class="h-full text-zinc-50 antialiased dark:bg-zinc-950">
-  {#if !worldsDismissed}
-    <div
-      out:fly={{ y: -50 }}
-      class="fixed top-0 right-0 left-0 z-50 mb-2 flex items-center justify-between gap-1 border-b border-blue-950/90 bg-blue-950 px-4 py-2 text-xs font-medium backdrop-blur-sm lg:text-sm"
-    >
-      <p class="font-semibold">VEX World Championship Finals Watch Party happening now!</p>
-      <div class="flex space-x-4 lg:block">
-        <a
-          class="underline-offset-4 hover:underline"
-          href="/worlds"
-          onclick={() => (worldsDismissed = true)}>Come join!</a
-        >
-        <button
-          onclick={() => (worldsDismissed = true)}
-          class="inline-flex h-8 items-center rounded-md bg-red-900 px-3 text-xs hover:bg-red-900/90"
-        >
-          <X />
-        </button>
-      </div>
-    </div>
-  {/if}
+<div class="min-h-full bg-zinc-50 text-zinc-950 antialiased dark:bg-zinc-950 dark:text-zinc-950">
   <div class="flex">
     <SideNav />
     {#if navigating.to}
       <div class="flex min-h-screen w-full">
         <div class="m-auto">
-          <BlockSpinner size={24} fill="#FFFFFF" active={true} />
+          <BlockSpinner size={8} active={true} />
         </div>
       </div>
     {:else}
