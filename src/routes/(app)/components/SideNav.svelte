@@ -7,7 +7,6 @@
 
   import Home from '$lib/icons/Home.svelte';
   import Map from '$lib/icons/Map.svelte';
-  import Medal from '$lib/icons/Medal.svelte';
   import MessageCircle from '$lib/icons/MessageCircle.svelte';
   import Megaphone from '$lib/icons/Megaphone.svelte';
   import Bug from '$lib/icons/Bug.svelte';
@@ -15,7 +14,6 @@
   import { fly } from 'svelte/transition';
   import { prefersReducedMotion } from 'svelte/motion';
   import ListOrdered from '$lib/icons/ListOrdered.svelte';
-
   let profile = $state(false);
 </script>
 
@@ -26,7 +24,7 @@
 />
 <div
   role="navigation"
-  class="fixed right-5 bottom-5 left-5 z-40 flex justify-center gap-2 rounded-full border border-zinc-200 p-2 backdrop-blur-md lg:sticky lg:top-0 lg:right-0 lg:bottom-0 lg:left-0 lg:h-screen lg:w-auto lg:flex-col lg:justify-start lg:rounded-none lg:border-y-0 lg:border-r lg:border-l-0 lg:backdrop-blur-none dark:border-zinc-800"
+  class="fixed right-5 bottom-5 left-5 z-40 flex justify-center gap-2 rounded-full border border-zinc-200 bg-zinc-50 p-2 backdrop-blur-md lg:sticky lg:top-0 lg:right-0 lg:bottom-0 lg:left-0 lg:h-screen lg:w-auto lg:flex-col lg:justify-start lg:rounded-none lg:border-y-0 lg:border-r lg:border-l-0 lg:backdrop-blur-none dark:border-zinc-800 dark:bg-zinc-950"
 >
   <NavLink label="Home" active={page.route.id! == '/(app)'} href="/">
     <Home />
@@ -60,7 +58,7 @@
   >
   {#if profile}
     <div
-      class="absolute right-0 bottom-16 w-56 rounded-md border border-zinc-200 bg-zinc-50 p-1 shadow md:right-6 lg:right-0 lg:bottom-12 lg:left-3 dark:border-zinc-800 dark:bg-zinc-50"
+      class="absolute right-0 bottom-16 w-56 rounded-md border border-zinc-200 bg-zinc-50 p-1 shadow md:right-6 lg:right-0 lg:bottom-12 lg:left-3 dark:border-zinc-800 dark:bg-zinc-950"
       in:fly={{ y: prefersReducedMotion.current ? 0 : 15, duration: 250 }}
       out:fly={{ x: prefersReducedMotion.current ? 0 : -10, duration: 125 }}
     >
