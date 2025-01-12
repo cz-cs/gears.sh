@@ -35,8 +35,17 @@
   <PageSkeleton />
 {:then event}
   {@const now = dayjs()}
-  {@const start = dayjs(event.start)}
-  {@const end = dayjs(event.end)}
+  {@const start = dayjs(event.start)
+    .hour(now.hour())
+    .minute(now.minute())
+    .second(now.second())
+    .millisecond(now.millisecond())}
+  {@const end = dayjs(event.end)
+    .hour(now.hour())
+    .minute(now.minute())
+    .second(now.second())
+    .millisecond(now.millisecond())}
+  <!-- dates have the same time because all robotevents competitions are set to 12 am. Boiiiiiiiiii this so not tuff -->
   {@const spansTime = !start.isSame(end)}
   <Container>
     <Title extraProps="mb-3">{event.name}</Title>
