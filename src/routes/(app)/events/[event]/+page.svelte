@@ -19,11 +19,13 @@
   import relativeTime from 'dayjs/plugin/relativeTime';
   import Row from '$lib/components/info/table/Row.svelte';
   import Head from '$lib/components/info/table/Head.svelte';
-  import { isActionFailure } from '@sveltejs/kit';
+  import Tabs from '$lib/components/tabs/Tabs.svelte';
+  import TabButton from '$lib/components/tabs/TabButton.svelte';
+  import type { PageData } from './$types';
 
-  let { data } = $props();
+  let { data }: { data: PageData } = $props();
 
-  let teamState = $state(1);
+  let page = $state(1);
 
   dayjs.extend(relativeTime);
 </script>
@@ -84,43 +86,34 @@
     </div>
     <div class="mb-3 flex items-center justify-between" id="teams">
       <Section>{m.lost_red_frog_hack()}</Section>
-      <div class="inline-flex h-9 rounded-lg bg-zinc-800 p-1 text-zinc-400">
-        <button
-          data-active={true}
-          class="inline-flex cursor-pointer items-center justify-center rounded-md px-3 py-1 text-xs font-medium transition-colors focus-visible:ring-2 focus-visible:ring-zinc-50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent focus-visible:outline-none data-[active=true]:bg-zinc-950 data-[active=true]:text-zinc-50"
-        >
-          Teams
-        </button>
-        <button
-          data-active={false}
-          disabled={start.isAfter(now)}
-          class="inline-flex cursor-pointer items-center justify-center rounded-md px-3 py-1 text-xs font-medium transition-colors focus-visible:ring-2 focus-visible:ring-zinc-50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent focus-visible:outline-none disabled:cursor-default disabled:opacity-50 data-[active=true]:bg-zinc-950 data-[active=true]:text-zinc-50"
-        >
-          Results
-        </button>
-      </div>
+      <Tabs>
+        <TabButton active={page === 1} onclick={() => (page = 1)}>Teams</TabButton>
+        <TabButton active={page === 2} onclick={() => (page = 2)}>Results</TabButton>
+      </Tabs>
     </div>
-    {#await data.teams then teams}
-      {@debug teams}
-      {#if teams.data!.length === 0}
-        <Section>{m.sunny_basic_raven_snap()}</Section>
-      {:else}
-        <table class="w-full text-xs lg:text-sm">
-          <thead class="border-b border-zinc-800">
-            <tr>
-              <Head>ID</Head>
-              <Head>{m.minor_lofty_emu_trust()}</Head>
-              <Head>{m.inner_tidy_tuna_walk()}</Head>
-              <Head extraProps="text-right">{m.low_bland_otter_adapt()}</Head>
-            </tr>
-          </thead>
-          <tbody>
-            {#each teams.data! as team}
-              <Row {...team} />
-            {/each}
-          </tbody>
-        </table>
-      {/if}
-    {/await}
+    {#if page === 1}
+      {#await data.teams then teams}
+        {@debug teams}
+        {#if teams.data!.length === 0}
+          <Section>{m.sunny_basic_raven_snap()}</Section>
+        {:else}
+          <table class="w-full text-xs lg:text-sm">
+            <thead class="border-b border-zinc-800">
+              <tr>
+                <Head>ID</Head>
+                <Head>{m.minor_lofty_emu_trust()}</Head>
+                <Head>{m.inner_tidy_tuna_walk()}</Head>
+                <Head extraProps="text-right">{m.low_bland_otter_adapt()}</Head>
+              </tr>
+            </thead>
+            <tbody>
+              {#each teams.data! as team}
+                <Row {...team} />
+              {/each}
+            </tbody>
+          </table>
+        {/if}
+      {/await}
+    {:else if page === 2}{/if}
   </Container>
 {/await}
