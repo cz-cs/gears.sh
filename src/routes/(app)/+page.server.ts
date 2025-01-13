@@ -19,5 +19,5 @@ export const load: PageServerLoad = async ({ fetch, locals }) => {
     team: [Number.parseInt(teams.teams[0].$id)]
   });
 
-  return { events: res as Promise<Paginated<Event>>, nickname: session.prefs.name };
+  return { events: res as Promise<Paginated<Event>> };
 };

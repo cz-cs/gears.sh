@@ -7,7 +7,6 @@
 
   import Home from '$lib/icons/Home.svelte';
   import Map from '$lib/icons/Map.svelte';
-  import Medal from '$lib/icons/Medal.svelte';
   import MessageCircle from '$lib/icons/MessageCircle.svelte';
   import Megaphone from '$lib/icons/Megaphone.svelte';
   import Bug from '$lib/icons/Bug.svelte';
@@ -54,7 +53,7 @@
     aria-label="Profile"
     ><img
       class="h-8 w-8 rounded-full lg:rounded-md"
-      src="https://cdn.vectorstock.com/i/500p/52/48/yellow-smile-face-seamless-pattern-funny-melting-vector-45485248.jpg"
+      src="https://cloud.appwrite.io/v1/avatars/initials?name={page.data.name}&width=32&height=32"
       alt=""
     /></button
   >
