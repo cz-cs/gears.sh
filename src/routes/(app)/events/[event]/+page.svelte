@@ -35,25 +35,37 @@
   <PageSkeleton />
 {:then event}
   {@const now = dayjs()}
-  {@const start = dayjs(event.start)}
-  {@const end = dayjs(event.end)}
+  {@const start = dayjs(event.start)
+    .hour(now.hour())
+    .minute(now.minute())
+    .second(now.second())
+    .millisecond(now.millisecond())}
+  {@const end = dayjs(event.end)
+    .hour(now.hour())
+    .minute(now.minute())
+    .second(now.second())
+    .millisecond(now.millisecond())}
+  <!-- dates have the same time because all robotevents competitions are set to 12 am. Boiiiiiiiiii this so not tuff -->
   {@const spansTime = !start.isSame(end)}
+  {@const fullAddress = `${event.location.address_1}, ${event.location.city}${
+    event.location.region !== null ? `, ${event.location.region}` : ''
+  }`}
   <Container>
     <Title extraProps="mb-3">{event.name}</Title>
     <div class="mb-6 grid grid-cols-2 gap-2">
       <Card
-        href={`http://maps.apple.com/?ll=${event.location.coordinates?.lat},${event.location.coordinates?.lon}`}
+        href={`http://maps.apple.com/?t=r&q=${event.location.venue}&address=${fullAddress}`}
         heading={m.every_inner_vole_hug()}
         icon={MapPin}
         ><Content>
-          {event.location.city}{event.location.region !== null ? `, ${event.location.region}` : ''}
+          {event.location.venue}
         </Content>
         <Subtitle>{event.location.address_1}</Subtitle></Card
       >
       <Card
         heading={m.east_icy_gecko_buzz()}
         icon={CalendarDays}
-        href={`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${event.name}&dates=${new Date(event.start!).toISOString().replace(/(?:T.*)|(?:[-])/g, '')}/${new Date(event.end!).toISOString().replace(/(?:T.*)|(?:[-])/g, '')}&location=${event.location.address_1}, ${event.location.city}&sprop=website:gears.sh/events/${event.id}&sprop=name:gears`}
+        href={`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${event.name}&dates=${new Date(event.start!).toISOString().replace(/(?:T.*)|(?:[-])/g, '')}/${new Date(event.end!).toISOString().replace(/(?:T.*)|(?:[-])/g, '')}&location=${fullAddress}&sprop=website:gears.sh/events/${event.id}&sprop=name:gears`}
       >
         <Content>
           {#if spansTime}
@@ -63,12 +75,8 @@
           {/if}
         </Content>
         <Subtitle>
-          {#if spansTime}
-            {#if now.isAfter(start) && now.isBefore(end)}
-              ends {end.fromNow()}
-            {:else}
-              {start.fromNow()}
-            {/if}
+          {#if spansTime && now.isAfter(start) && now.isBefore(end)}
+            ends {end.fromNow()}
           {:else}
             {start.fromNow()}
           {/if}

@@ -30,7 +30,7 @@ const param = (name: string, value: any): string => {
   if (Array.isArray(value)) {
     return value.reduce((s, x) => `${s}${name}[]=${x}&`, '');
   }
-  return `${value ? `${name}=${value}` : ''}`;
+  return `${value ? `${name}=${value}&` : ''}`;
 };
 
 //#region Events

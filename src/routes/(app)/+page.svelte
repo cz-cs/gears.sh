@@ -26,7 +26,7 @@
       <EventCardSkeleton />
       <EventCardSkeleton />
     {:then events}
-      <div class="space-y-5">
+      <div class="space-y-2">
         {#each events.data as event}
           <EventCard {...event} />
         {/each}
