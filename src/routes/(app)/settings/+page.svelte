@@ -74,7 +74,7 @@
   <div class="flex flex-col gap-4 lg:flex-row">
     <div class="flex gap-2 lg:w-1/5 lg:flex-col">
       <Tab active={page === 1} onclick={() => (page = 1)}>Account</Tab>
-      <Tab active={page === 2} onclick={() => (page = 2)}>Privacy & Security</Tab>
+      <Tab disabled active={page === 2} onclick={() => (page = 2)}>Privacy & Security</Tab>
       <Tab active={page === 3} onclick={() => (page = 3)}>Theme</Tab>
     </div>
     {#if page === 1}
