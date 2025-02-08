@@ -3,7 +3,7 @@
   import Container from '$lib/components/pages/Container.svelte';
   import Section from '$lib/components/pages/Section.svelte';
   import Title from '$lib/components/pages/Title.svelte';
-  import { fly } from 'svelte/transition';
+  import { fly, scale } from 'svelte/transition';
   import Tab from './components/Tab.svelte';
   import LinkOutline from '$lib/components/button/LinkOutline.svelte';
   import { applyAction, enhance } from '$app/forms';
@@ -11,6 +11,7 @@
   import AlertTriangle from '$lib/icons/AlertTriangle.svelte';
   import { untrack } from 'svelte';
   import Input from '$lib/components/form/Input.svelte';
+  import { quadIn } from 'svelte/easing';
 
   let { data, form } = $props();
 
@@ -33,14 +34,15 @@
 
 {#if showSignout}
   <div
-    transition:fly={{ y: 15, duration: 250 }}
+    in:fly={{ y: 15, duration: 250 }}
+    out:scale={{ start: 0.95, easing: quadIn, duration: 100 }}
     class="no-doc-scroll fixed top-0 right-0 bottom-0 left-0 z-50 flex h-full flex-col bg-zinc-950/70 backdrop-blur-sm"
   >
     <div class="m-auto flex flex-col rounded-md border border-zinc-800 bg-zinc-950 p-4">
       <p class="mb-3 text-lg font-semibold">Are you sure you want to sign out?</p>
-      <div class="w-full gap-2 md:flex">
-        <LinkOutline href="?/signout">Yes</LinkOutline>
-        <Button onclick={() => (showSignout = false)}>No</Button>
+      <div class="flex flex-col justify-stretch gap-2 md:flex-row">
+        <LinkOutline extraProps="w-full" href="?/signout">Yes</LinkOutline>
+        <Button extraProps="w-full" onclick={() => (showSignout = false)}>No</Button>
       </div>
     </div>
   </div>
@@ -157,7 +159,13 @@
           <div class="flex flex-col gap-2 text-xs font-medium md:text-sm">
             Email
             <div class="flex gap-2">
-              <Input disabled={submitting} placeholder="Email..." bind:value={email} />
+              <Input
+                extraProps="w-full"
+                disabled={submitting}
+                error={!email.includes('@')}
+                placeholder="Email..."
+                bind:value={email}
+              />
               <Button disabled={submitting} form="email"
                 >Update<BlockSpinner active={submitting} fill="09090b" size={16} /></Button
               >
