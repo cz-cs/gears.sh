@@ -12,6 +12,7 @@
   import { untrack } from 'svelte';
   import Input from '$lib/components/form/Input.svelte';
   import { quadIn } from 'svelte/easing';
+  import Outline from '$lib/components/button/Outline.svelte';
 
   let { data, form } = $props();
 
@@ -32,6 +33,9 @@
   });
 </script>
 
+<svelte:head>
+  <title>Settings - gears</title>
+</svelte:head>
 {#if showSignout}
   <div
     in:fly={{ y: 15, duration: 250 }}
@@ -41,7 +45,7 @@
     <div class="m-auto flex flex-col rounded-md border border-zinc-800 bg-zinc-950 p-4">
       <p class="mb-3 text-lg font-semibold">Are you sure you want to sign out?</p>
       <div class="flex flex-col justify-stretch gap-2 md:flex-row">
-        <LinkOutline extraProps="w-full" href="?/signout">Yes</LinkOutline>
+        <LinkOutline extraProps="w-full" href="/settings/signout">Yes</LinkOutline>
         <Button extraProps="w-full" onclick={() => (showSignout = false)}>No</Button>
       </div>
     </div>
@@ -80,9 +84,7 @@
     {#if page === 1}
       <div class="mb-20 w-full space-y-3 lg:mb-0">
         <Section>Account Settings</Section>
-        <p class="mb-6 text-sm font-medium text-zinc-400">
-          Change your username, display name, set email and more.
-        </p>
+        <p class="mb-6 text-sm font-medium text-zinc-400">How you appear to other people</p>
         <div class="space-y-2">
           <form
             method="post"
