@@ -87,18 +87,18 @@
           <div class="grid auto-cols-max grid-cols-1 gap-2 md:grid-cols-2">
             {#each rankings.data as rank}
               <a
-                class="inline-flex flex-col justify-center space-y-2 rounded-md border border-zinc-800 bg-zinc-950 p-3 text-sm font-medium shadow-md hover:bg-zinc-900"
+                class="inline-flex flex-col justify-center space-y-2 rounded-md border border-zinc-200 p-3 text-sm font-medium shadow transition-colors hover:bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-950 dark:hover:bg-zinc-900"
                 href="/events/{rank.event!.id}"
               >
                 <p>{rank.event!.name}</p>
-                <div class="h-px bg-zinc-800"></div>
+                <div class="h-px bg-zinc-200 dark:bg-zinc-800"></div>
                 <div class="flex justify-evenly gap-3 text-xs font-normal md:text-sm">
                   <p>rank <span class="font-bold">{rank.rank}</span></p>
-                  <div class="w-px bg-zinc-800"></div>
+                  <div class="w-px bg-zinc-200 dark:bg-zinc-800"></div>
                   <p><span class="font-bold">{rank.total_points}</span> total points</p>
-                  <div class="w-px bg-zinc-800"></div>
+                  <div class="w-px bg-zinc-200 dark:bg-zinc-800"></div>
                   <p>high score <span class="font-bold">{rank.high_score}</span></p>
-                  <div class="w-px bg-zinc-800"></div>
+                  <div class="w-px bg-zinc-200 dark:bg-zinc-800"></div>
                   <p>average <span class="font-bold">{rank.average_points}</span></p>
                 </div>
               </a>
