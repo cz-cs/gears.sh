@@ -21,7 +21,7 @@
   dayjs.extend(LocalizedFormat);
 </script>
 
-<div class="h-full bg-zinc-50 text-zinc-950 antialiased dark:bg-zinc-950 dark:text-zinc-50">
+<div class="min-h-screen bg-zinc-50 text-zinc-950 antialiased dark:bg-zinc-950 dark:text-zinc-50">
   {#if !worldsDismissed}
     <div
       out:fly={{ y: -50 }}

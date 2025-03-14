@@ -27,7 +27,7 @@
 />
 <div
   role="navigation"
-  class="fixed right-5 bottom-5 left-5 z-40 flex justify-center gap-2 rounded-full border border-zinc-200 p-2 backdrop-blur-md lg:sticky lg:top-0 lg:right-0 lg:bottom-0 lg:left-0 lg:h-screen lg:w-auto lg:flex-col lg:justify-start lg:rounded-none lg:border-y-0 lg:border-r lg:border-l-0 lg:backdrop-blur-none dark:border-zinc-800"
+  class="fixed right-5 bottom-5 left-5 z-40 flex justify-center gap-2 rounded-full border border-zinc-200 p-2 shadow backdrop-blur-md lg:sticky lg:top-0 lg:right-0 lg:bottom-0 lg:left-0 lg:h-screen lg:w-auto lg:flex-col lg:justify-start lg:rounded-none lg:border-y-0 lg:border-r lg:border-l-0 lg:shadow-none lg:backdrop-blur-none dark:border-zinc-800"
 >
   <NavLink label="Home" active={page.route.id! == '/(app)'} href="/">
     <Home />
