@@ -40,5 +40,5 @@
   bind:value
   {type}
   {disabled}
-  class="flex h-9 rounded-md border border-zinc-800 px-4 py-2 text-xs font-medium shadow-sm ring-zinc-50 transition-all outline-none placeholder:text-zinc-400 focus-visible:ring-2 data-[error=true]:ring-2 data-[error=true]:ring-red-600 {extraProps}"
+  class="flex h-9 rounded-md border border-zinc-200 px-4 py-2 text-xs font-medium shadow-sm ring-zinc-950 transition-all outline-none placeholder:text-zinc-400 focus-visible:ring-2 data-[error=true]:ring-2 data-[error=true]:ring-red-600 dark:border-zinc-800 dark:ring-zinc-50 {extraProps}"
 />

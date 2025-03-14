@@ -48,7 +48,7 @@
     {#if navigating.to}
       <div class="flex min-h-screen w-full">
         <div class="m-auto">
-          <BlockSpinner size={24} fill="#FFFFFF" active={true} />
+          <BlockSpinner active={true} />
         </div>
       </div>
     {:else}

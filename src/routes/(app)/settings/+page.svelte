@@ -13,6 +13,7 @@
   import Input from '$lib/components/form/Input.svelte';
   import { quadIn } from 'svelte/easing';
   import Outline from '$lib/components/button/Outline.svelte';
+  import Seperator from '$lib/components/Seperator.svelte';
 
   let { data, form } = $props();
 
@@ -74,7 +75,7 @@
   <p class="text-zinc-400">
     Manage privacy settings, security preferences, and website preferences.
   </p>
-  <div role="separator" class="my-6 h-px shrink-0 bg-zinc-800"></div>
+  <Seperator extraProps="my-6" />
   <div class="flex flex-col gap-4 lg:flex-row">
     <div class="flex gap-2 lg:w-1/5 lg:flex-col">
       <Tab active={page === 1} onclick={() => (page = 1)}>Account</Tab>
@@ -132,10 +133,10 @@
             </div>
           </div>
           <Button disabled={submitting} form="name"
-            >Save changes<BlockSpinner active={submitting} fill="09090b" size={16} /></Button
+            >Save changes<BlockSpinner active={submitting} /></Button
           >
         </div>
-        <div role="separator" class="my-3 h-px bg-zinc-800"></div>
+        <Seperator extraProps="my-3" />
         <div class="space-y-2">
           <form
             method="post"
@@ -174,12 +175,12 @@
             </div>
           </div>
         </div>
-        <div role="separator" class="my-3 h-px bg-zinc-800"></div>
+        <Seperator extraProps="my-6" />
         <p class="text-xs font-medium text-zinc-400">
           More settings coming soon, including changing password. If you forgot your password, email
           me@czcs.xyz
         </p>
-        <div role="separator" class="my-3 h-px bg-zinc-800"></div>
+        <Seperator extraProps="my-6" />
         <button
           onclick={() => (showSignout = true)}
           class="inline-flex h-9 cursor-pointer items-center gap-2 rounded-md bg-red-950 px-4 py-2 text-xs font-medium text-red-50 shadow-sm ring-red-50 transition-all hover:bg-red-900 focus-visible:ring focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"

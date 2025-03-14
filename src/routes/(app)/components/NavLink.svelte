@@ -24,7 +24,7 @@
   role="tab"
   onmouseenter={() => (hover = true)}
   onmouseleave={() => (hover = false)}
-  class="relative self-center rounded-md p-2 hover:bg-zinc-200 data-[active=true]:bg-zinc-200 dark:hover:bg-zinc-800 dark:data-[active=true]:bg-zinc-800"
+  class="relative self-center rounded-md p-2 hover:bg-zinc-100 data-[active=true]:bg-zinc-100 dark:hover:bg-zinc-800 dark:data-[active=true]:bg-zinc-800"
   data-active={active}
   {href}
 >

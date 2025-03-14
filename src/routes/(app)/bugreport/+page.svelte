@@ -19,7 +19,7 @@
 {#if form?.message}
   <div
     transition:fly={{ x: 30 }}
-    class="absolute right-4 bottom-4 flex gap-2 rounded-md border border-green-800 bg-green-950 px-4 py-2"
+    class="absolute right-4 bottom-4 z-50 flex gap-2 rounded-md border border-green-800 bg-green-950 px-4 py-2"
   >
     <p class="text-xs font-medium text-green-50">Bug report submitted! Thank you!</p>
   </div>
@@ -36,7 +36,7 @@
     />
   </div>
   <Button form="form" disabled={submitting}
-    ><BlockSpinner fill="#000000" active={submitting} size={16} />Submit</Button
+    ><BlockSpinner active={submitting} size={16} />Submit</Button
   >
 </Container>
 <form

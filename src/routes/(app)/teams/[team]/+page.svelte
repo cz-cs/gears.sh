@@ -82,7 +82,7 @@
     {#if page === 1}
       {#if currentSeason}
         {#await data.rankings}
-          <BlockSpinner fill="#ffffff" active={true} size={32} />
+          <BlockSpinner active={true} size={32} />
         {:then rankings}
           <div class="grid auto-cols-max grid-cols-1 gap-2 md:grid-cols-2">
             {#each rankings.data as rank}
