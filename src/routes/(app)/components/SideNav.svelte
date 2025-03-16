@@ -16,6 +16,8 @@
   import { prefersReducedMotion } from 'svelte/motion';
   import ListOrdered from '$lib/icons/ListOrdered.svelte';
   import { cubicIn, quadIn, quintIn } from 'svelte/easing';
+  import Gamepad2 from '$lib/icons/Gamepad2.svelte';
+  import Pencil from '$lib/icons/Pencil.svelte';
 
   let profile = $state(false);
 </script>
@@ -36,9 +38,12 @@
     <Map />
   </NavLink>
   <NavLink label="Skills rankings" active={false} href="/rankings">
-    <ListOrdered />
+    <Medal />
   </NavLink>
-  <NavLink label="Team Chat" active={page.route.id!.includes('/chat')} href="/chat">
+  <NavLink label="Game hub" active={page.route.id!.includes('/game')} href="/game/timer">
+    <Gamepad2 />
+  </NavLink>
+  <NavLink label="Team chat" active={page.route.id!.includes('/chat')} href="/chat">
     <MessageCircle />
   </NavLink>
   <div class="mt-0 border-l border-zinc-800 lg:mt-auto lg:border-0"></div>

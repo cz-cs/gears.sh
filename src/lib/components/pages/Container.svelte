@@ -5,6 +5,6 @@
   let { children, extraProps = '' } = $props();
 </script>
 
-<div class="mb-16 w-full p-4 lg:mb-0 {extraProps}" in:fly={{ y: -15 }}>
+<div class="w-full p-4 lg:mb-0 {extraProps}" in:fly={{ y: -15 }}>
   {@render children()}
 </div>
