@@ -119,7 +119,7 @@
     }
 
     if (program == 'ftc') {
-      status = 'autonomous period';
+      status = 'autonomous';
       time = '0:30';
 
       timeInterval = setInterval(() => {
@@ -133,6 +133,7 @@
           timeInterval = undefined;
 
           ftcHandoffAudio.play();
+          flickerScreen();
 
           status = 'pick up your controllers, drivers';
           time = '0:08';
@@ -151,6 +152,7 @@
               clearInterval(handoffInterval);
 
               ftcDriverStartAudio.play();
+              flickerScreen();
 
               status = 'driver control';
               time = '2:30';
@@ -163,6 +165,7 @@
 
                 if (seconds == 30) {
                   status = 'endgame';
+                  flickerScreen();
                   ftcEndgameAudio.play();
                 }
 
@@ -425,5 +428,8 @@
         </div>
       {/if}
     </div>
-  </div></Container
->
+    <p class="mt-3 text-center text-xs text-zinc-400">
+      all sound effects are used under fair use terms. gears claims no ownership of these sounds.
+    </p>
+  </div>
+</Container>
