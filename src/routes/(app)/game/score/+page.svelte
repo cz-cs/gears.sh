@@ -37,7 +37,7 @@
         <p>balls scored</p>
       </div>
       <div class="flex items-center gap-3">
-        <Input type="number" bind:value={cleared} placeholder="0" />
+        <Input extraProps="w-fit" type="number" bind:value={cleared} placeholder="0" />
         <p>switches cleared</p>
       </div>
       <p class="text-center text-5xl font-medium lg:text-7xl">{total}</p>

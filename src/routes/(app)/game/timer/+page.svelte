@@ -325,13 +325,13 @@
 <Container extraProps="flex flex-col min-h-screen">
   <Title>Game timer</Title>
   <div class="m-auto lg:w-1/2">
-    <div class="rounded-xl border border-zinc-200 p-6 shadow dark:border-zinc-800">
+    <div class="rounded-xl border-zinc-200 p-6 shadow lg:border dark:border-zinc-800">
       <div class="flex w-full items-center justify-between">
         <p class="text-center text-xs tracking-[0.27em] text-zinc-400 lowercase lg:text-sm">
           {status}
         </p>
       </div>
-      <p class="my-6 text-center text-8xl font-medium lg:text-9xl">{time}</p>
+      <p class="my-6 text-center text-9xl font-medium">{time}</p>
       <div class="flex items-center justify-between gap-3">
         <Primary onclick={start} disabled={timeInterval != undefined} extraProps="w-full"
           >Start</Primary
@@ -342,8 +342,10 @@
       {#if status == 'not started' || status == 'match ended' || status == 'match ended abruptly'}
         <div transition:slide={{ duration: 500, easing: expoInOut }}>
           <div class="my-3 h-px w-full bg-zinc-200 dark:bg-zinc-800"></div>
-          <div class="mt-3 flex justify-between">
-            <div class="inline-flex h-9 rounded-lg bg-zinc-800 p-1 text-zinc-400">
+          <div class="mt-3 flex flex-col justify-between gap-3 lg:flex-row lg:gap-0">
+            <div
+              class="inline-flex h-9 justify-center rounded-lg bg-zinc-800 p-1 text-zinc-400 lg:justify-normal"
+            >
               <button
                 data-active={program == 'iq'}
                 onclick={() => (program = 'iq')}
@@ -385,7 +387,9 @@
                 FRC
               </button>
             </div>
-            <div class="inline-flex h-9 rounded-lg bg-zinc-800 p-1 text-zinc-400">
+            <div
+              class="inline-flex h-9 justify-center rounded-lg bg-zinc-800 p-1 text-zinc-400 lg:justify-normal"
+            >
               <button
                 data-active={type == true}
                 disabled={program == 'ftc' || program == 'frc'}
