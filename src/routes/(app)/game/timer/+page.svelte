@@ -324,7 +324,7 @@
 
 <Container extraProps="flex flex-col min-h-screen">
   <Title>Game timer</Title>
-  <div class="m-auto lg:w-1/2">
+  <div class="my-auto lg:mx-auto lg:w-1/2">
     <div class="rounded-xl border-zinc-200 p-6 shadow lg:border dark:border-zinc-800">
       <div class="flex w-full items-center justify-between">
         <p class="text-center text-xs tracking-[0.27em] text-zinc-400 lowercase lg:text-sm">
@@ -432,8 +432,5 @@
         </div>
       {/if}
     </div>
-    <p class="mt-3 text-center text-xs text-zinc-400">
-      all sound effects are used under fair use terms. gears claims no ownership of these sounds.
-    </p>
   </div>
 </Container>
