@@ -9,14 +9,26 @@
   import stopSfx from '$lib/audio/end.mp3';
   import boomSfx from '$lib/audio/switch.mp3';
 
-  import iqIcon from '$lib/icons/vex/iq.svg';
-  import v5Icon from '$lib/icons/vex/v5.svg';
+  import ftcStartSfx from '$lib/audio/ftc/matchStart.mp3';
+  import ftcHandoffSfx from '$lib/audio/ftc/driverHandoff.mp3';
+  import ftcDriverStartSfx from '$lib/audio/ftc/driverStart.mp3';
+  import ftcEndgameSfx from '$lib/audio/ftc/endgameStart.mp3';
+  import ftcEndSfx from '$lib/audio/ftc/matchEnd.mp3';
+
   import { blur, fade, scale, slide } from 'svelte/transition';
+  import LinkPrimary from '$lib/components/button/LinkPrimary.svelte';
+  import { expoInOut } from 'svelte/easing';
 
   let countAudio: HTMLAudioElement;
   let startAudio: HTMLAudioElement;
   let stopAudio: HTMLAudioElement;
   let boomAudio: HTMLAudioElement;
+
+  let ftcAudio: HTMLAudioElement;
+  let ftcHandoffAudio: HTMLAudioElement;
+  let ftcDriverStartAudio: HTMLAudioElement;
+  let ftcEndgameAudio: HTMLAudioElement;
+  let ftcEndAudio: HTMLAudioElement;
 
   let time = $state('...');
   let status = $state('not started');
@@ -28,6 +40,18 @@
   let sound = $state(false);
 
   let timeInterval: NodeJS.Timeout | undefined = $state(undefined);
+
+  function flickerScreen() {
+    let flickerCount = 0;
+    let invertInterval = setInterval(() => {
+      document.body.style.filter = flickerCount % 2 === 0 ? 'invert(100%)' : 'invert(0%)';
+      flickerCount++;
+      if (flickerCount === 4) {
+        clearInterval(invertInterval);
+        document.body.style.filter = 'invert(0%)';
+      }
+    }, 250);
+  }
 
   function toSec(time: string) {
     const parts = time.split(':');
@@ -71,7 +95,7 @@
   }
 
   function timerStart() {
-    if (type == false) {
+    if (type == false && program != 'ftc') {
       status = 'skills';
       time = '1:00';
 
@@ -89,6 +113,70 @@
 
           time = '0:00';
           status = 'match ended';
+        }
+      }, 1000);
+      return;
+    }
+
+    if (program == 'ftc') {
+      status = 'autonomous period';
+      time = '0:30';
+
+      timeInterval = setInterval(() => {
+        let seconds = toSec(time);
+        seconds--;
+
+        time = formatTime(seconds);
+
+        if (seconds == 0) {
+          clearInterval(timeInterval);
+          timeInterval = undefined;
+
+          ftcHandoffAudio.play();
+
+          status = 'pick up your controllers, drivers';
+          time = '0:08';
+
+          let handoffInterval = setInterval(() => {
+            let seconds = toSec(time);
+            seconds--;
+
+            time = formatTime(seconds);
+
+            if (seconds <= 3) {
+              countAudio.play();
+            }
+
+            if (seconds == 0) {
+              clearInterval(handoffInterval);
+
+              ftcDriverStartAudio.play();
+
+              status = 'driver control';
+              time = '2:30';
+
+              timeInterval = setInterval(() => {
+                let seconds = toSec(time);
+                seconds--;
+
+                time = formatTime(seconds);
+
+                if (seconds == 30) {
+                  status = 'endgame';
+                  ftcEndgameAudio.play();
+                }
+
+                if (seconds == 0) {
+                  status = 'match ended';
+                  ftcEndAudio.play();
+                  time = '0:00';
+
+                  clearInterval(timeInterval);
+                  timeInterval = undefined;
+                }
+              }, 1000);
+            }
+          }, 1000);
         }
       }, 1000);
       return;
@@ -129,12 +217,15 @@
 
           boomAudio.play();
 
+          flickerScreen();
+
           let switchInterval = setInterval(async () => {
             switchTime--;
             status = `driver switch / ${switchTime}`;
             if (switchTime == 0) {
               await boomAudio.play();
               status = 'teamwork / 2nd driver';
+              flickerScreen();
               clearInterval(switchInterval);
             }
           }, 1000);
@@ -158,7 +249,7 @@
     if (status == 'not started' || status == 'match ended' || status == 'match ended abruptly') {
       if (countdown) {
         time = '3';
-        status = 'countdown';
+        status = '...';
 
         countAudio.play();
 
@@ -169,7 +260,11 @@
           if (time == '0') {
             clearInterval(interval);
 
-            startAudio.play();
+            if (program == 'ftc') {
+              ftcAudio.play();
+            } else {
+              startAudio.play();
+            }
 
             timerStart();
           }
@@ -177,7 +272,11 @@
           countAudio.play();
         }, 1000);
       } else {
-        startAudio.play();
+        if (program == 'ftc') {
+          ftcAudio.play();
+        } else {
+          startAudio.play();
+        }
 
         timerStart();
       }
@@ -191,7 +290,11 @@
     if (timeInterval != undefined) {
       clearInterval(timeInterval);
 
-      stopAudio.play();
+      if (program == 'ftc') {
+        ftcEndAudio.play();
+      } else {
+        stopAudio.play();
+      }
 
       time = '...';
       status = 'match ended abruptly';
@@ -204,6 +307,13 @@
 <svelte:head>
   <title>Game timer - gears</title>
 </svelte:head>
+
+<audio bind:this={ftcAudio} src={ftcStartSfx} bind:muted={sound}></audio>
+<audio bind:this={ftcHandoffAudio} src={ftcHandoffSfx} bind:muted={sound}></audio>
+<audio bind:this={ftcDriverStartAudio} src={ftcDriverStartSfx} bind:muted={sound}></audio>
+<audio bind:this={ftcEndgameAudio} src={ftcEndgameSfx} bind:muted={sound}></audio>
+<audio bind:this={ftcEndAudio} src={ftcEndSfx} bind:muted={sound}></audio>
+
 <audio bind:this={countAudio} src={count} bind:muted={sound}></audio>
 <audio bind:this={startAudio} src={startSfx} bind:muted={sound}></audio>
 <audio bind:this={stopAudio} src={stopSfx} bind:muted={sound}></audio>
@@ -214,48 +324,9 @@
   <div class="m-auto lg:w-1/2">
     <div class="rounded-xl border border-zinc-200 p-6 shadow dark:border-zinc-800">
       <div class="flex w-full items-center justify-between">
-        <div class="inline-flex h-9 rounded-lg bg-zinc-800 p-1 text-zinc-400">
-          <button
-            data-active={program == 'iq'}
-            onclick={() => (program = 'iq')}
-            class="inline-flex cursor-pointer items-center justify-center rounded-md px-3 py-1 text-xs font-medium transition-colors focus-visible:ring-2 focus-visible:ring-zinc-50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent focus-visible:outline-none data-[active=true]:bg-zinc-950 data-[active=true]:text-zinc-50"
-          >
-            IQ
-          </button>
-          <button
-            data-active={program == 'v5'}
-            onclick={() => (program = 'v5')}
-            class="inline-flex cursor-pointer items-center justify-center rounded-md px-3 py-1 text-xs font-medium transition-colors focus-visible:ring-2 focus-visible:ring-zinc-50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent focus-visible:outline-none disabled:cursor-default disabled:opacity-50 data-[active=true]:bg-zinc-950 data-[active=true]:text-zinc-50"
-          >
-            V5
-          </button>
-          <button
-            data-active={program == 'u'}
-            onclick={() => (program = 'u')}
-            class="inline-flex cursor-pointer items-center justify-center rounded-md px-3 py-1 text-xs font-medium transition-colors focus-visible:ring-2 focus-visible:ring-zinc-50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent focus-visible:outline-none disabled:cursor-default disabled:opacity-50 data-[active=true]:bg-zinc-950 data-[active=true]:text-zinc-50"
-          >
-            U
-          </button>
-        </div>
         <p class="text-center text-xs tracking-[0.27em] text-zinc-400 lowercase lg:text-sm">
           {status}
         </p>
-        <div class="inline-flex h-9 rounded-lg bg-zinc-800 p-1 text-zinc-400">
-          <button
-            data-active={type == true}
-            onclick={() => (type = true)}
-            class="inline-flex cursor-pointer items-center justify-center rounded-md px-3 py-1 text-xs font-medium transition-colors focus-visible:ring-2 focus-visible:ring-zinc-50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent focus-visible:outline-none disabled:cursor-default disabled:opacity-50 data-[active=true]:bg-zinc-950 data-[active=true]:text-zinc-50"
-          >
-            Regular
-          </button>
-          <button
-            data-active={type == false}
-            onclick={() => (type = false)}
-            class="inline-flex cursor-pointer items-center justify-center rounded-md px-3 py-1 text-xs font-medium transition-colors focus-visible:ring-2 focus-visible:ring-zinc-50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent focus-visible:outline-none data-[active=true]:bg-zinc-950 data-[active=true]:text-zinc-50"
-          >
-            Skills
-          </button>
-        </div>
       </div>
       <p class="my-6 text-center text-8xl font-medium lg:text-9xl">{time}</p>
       <div class="flex items-center justify-between gap-3">
@@ -266,9 +337,71 @@
         >
       </div>
       {#if status == 'not started' || status == 'match ended' || status == 'match ended abruptly'}
-        <div transition:slide={{ duration: 300 }}>
+        <div transition:slide={{ duration: 500, easing: expoInOut }}>
           <div class="my-3 h-px w-full bg-zinc-200 dark:bg-zinc-800"></div>
-          <div class="space-y-1">
+          <div class="mt-3 flex justify-between">
+            <div class="inline-flex h-9 rounded-lg bg-zinc-800 p-1 text-zinc-400">
+              <button
+                data-active={program == 'iq'}
+                onclick={() => (program = 'iq')}
+                class="inline-flex cursor-pointer items-center justify-center rounded-md px-3 py-1 text-xs font-medium transition-colors focus-visible:ring-2 focus-visible:ring-zinc-50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent focus-visible:outline-none data-[active=true]:bg-zinc-950 data-[active=true]:text-zinc-50"
+              >
+                IQ
+              </button>
+              <button
+                data-active={program == 'v5'}
+                onclick={() => (program = 'v5')}
+                class="inline-flex cursor-pointer items-center justify-center rounded-md px-3 py-1 text-xs font-medium transition-colors focus-visible:ring-2 focus-visible:ring-zinc-50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent focus-visible:outline-none disabled:cursor-default disabled:opacity-50 data-[active=true]:bg-zinc-950 data-[active=true]:text-zinc-50"
+              >
+                V5
+              </button>
+              <button
+                data-active={program == 'u'}
+                onclick={() => (program = 'u')}
+                class="inline-flex cursor-pointer items-center justify-center rounded-md px-3 py-1 text-xs font-medium transition-colors focus-visible:ring-2 focus-visible:ring-zinc-50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent focus-visible:outline-none disabled:cursor-default disabled:opacity-50 data-[active=true]:bg-zinc-950 data-[active=true]:text-zinc-50"
+              >
+                U
+              </button>
+              <button
+                data-active={program == 'ftc'}
+                onclick={() => {
+                  program = 'ftc';
+                }}
+                class="inline-flex cursor-pointer items-center justify-center rounded-md px-3 py-1 text-xs font-medium transition-colors focus-visible:ring-2 focus-visible:ring-zinc-50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent focus-visible:outline-none disabled:cursor-default disabled:opacity-50 data-[active=true]:bg-zinc-950 data-[active=true]:text-zinc-50"
+              >
+                FTC
+              </button>
+              <button
+                data-active={program == 'frc'}
+                disabled={true}
+                onclick={() => {
+                  program = 'frc';
+                }}
+                class="inline-flex cursor-pointer items-center justify-center rounded-md px-3 py-1 text-xs font-medium transition-colors focus-visible:ring-2 focus-visible:ring-zinc-50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent focus-visible:outline-none disabled:cursor-default disabled:opacity-50 data-[active=true]:bg-zinc-950 data-[active=true]:text-zinc-50"
+              >
+                FRC
+              </button>
+            </div>
+            <div class="inline-flex h-9 rounded-lg bg-zinc-800 p-1 text-zinc-400">
+              <button
+                data-active={type == true}
+                disabled={program == 'ftc' || program == 'frc'}
+                onclick={() => (type = true)}
+                class="inline-flex cursor-pointer items-center justify-center rounded-md px-3 py-1 text-xs font-medium transition-colors focus-visible:ring-2 focus-visible:ring-zinc-50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent focus-visible:outline-none disabled:cursor-default disabled:opacity-50 data-[active=true]:bg-zinc-950 data-[active=true]:text-zinc-50"
+              >
+                Regular
+              </button>
+              <button
+                data-active={type == false}
+                disabled={program == 'ftc' || program == 'frc'}
+                onclick={() => (type = false)}
+                class="inline-flex cursor-pointer items-center justify-center rounded-md px-3 py-1 text-xs font-medium transition-colors focus-visible:ring-2 focus-visible:ring-zinc-50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent focus-visible:outline-none data-[active=true]:bg-zinc-950 data-[active=true]:text-zinc-50"
+              >
+                Skills
+              </button>
+            </div>
+          </div>
+          <div class="my-3 space-y-1">
             <div class="flex gap-2">
               <button
                 aria-label="Countdown"
@@ -288,6 +421,7 @@
               <p class="text-xs font-medium">Sound</p>
             </div>
           </div>
+          <LinkPrimary href="/game/score" extraProps="w-full">Calculator</LinkPrimary>
         </div>
       {/if}
     </div>

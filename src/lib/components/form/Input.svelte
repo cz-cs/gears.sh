@@ -15,7 +15,7 @@
     required = false
   }: {
     name?: string;
-    value?: string;
+    value?: any;
     placeholder: string;
     error?: boolean;
     disabled?: boolean;
