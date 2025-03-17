@@ -7,6 +7,7 @@
   import Title from '$lib/components/pages/Title.svelte';
   import Section from '$lib/components/pages/Section.svelte';
   import Container from '$lib/components/pages/Container.svelte';
+  import GradientText from '$lib/components/GradientText.svelte';
 
   let { data }: { data: PageData } = $props();
 </script>

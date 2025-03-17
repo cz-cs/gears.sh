@@ -32,7 +32,7 @@
   <NavLink label="Home" active={page.route.id! == '/(app)'} href="/">
     <Home />
   </NavLink>
-  <NavLink label="Competitions" active={page.route.id!.includes('/events')} href="/competitions">
+  <NavLink label="Competitions" active={page.route.id!.includes('/events')} href="/events">
     <Map />
   </NavLink>
   <NavLink label="Skills rankings" active={false} href="/rankings">
