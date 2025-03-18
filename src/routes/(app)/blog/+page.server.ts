@@ -13,7 +13,7 @@ export const load: PageServerLoad = async ({ cookies }) => {
       title: x.title as string,
       description: x.description as string,
       author: x.author as string,
-      date: x.date as Date,
+      date: x.date as string,
       url: x.$id as string
     };
   });

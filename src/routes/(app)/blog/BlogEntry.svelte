@@ -1,4 +1,6 @@
 <script lang="ts">
+  import dayjs from 'dayjs';
+
   let {
     title,
     description,
@@ -14,7 +16,7 @@
 >
   <div class="flex items-center gap-2">
     <p class="font-medium">{title}</p>
-    <p class="text-zinc-400">{date}</p>
+    <p class="text-zinc-400">{dayjs(date).format('DD/MM/YYYY HH:mm')}</p>
     <p class="text-zinc-400">{author}</p>
   </div>
   <p class="text-xs text-zinc-400">{description}</p></a
