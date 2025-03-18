@@ -3,6 +3,47 @@
 @theme {
   --default-font-family: 'Funnel Sans';
 }
+hr {
+}
+.md h1 {
+  @apply scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl;
+}
+
+.md h2 {
+  @apply mt-10 scroll-m-20 border-b border-zinc-200 pb-2 text-3xl font-semibold tracking-tight first:mt-0 dark:border-zinc-800;
+}
+
+.md h3 {
+  @apply mt-8 scroll-m-20 text-2xl font-semibold tracking-tight;
+}
+
+.md h4 {
+  @apply scroll-m-20 text-xl font-semibold tracking-tight;
+}
+
+.md p {
+  @apply leading-7 not-first:mt-6;
+}
+
+.md a {
+  @apply font-medium underline underline-offset-2;
+}
+
+.md blockquote {
+  @apply mt-6 border-l-2 border-zinc-200 pl-6 italic dark:border-zinc-800;
+}
+
+.md ul {
+  @apply my-6 ml-6 list-disc;
+}
+
+.md li {
+  @apply mt-2;
+}
+
+.md code {
+  @apply relative rounded bg-zinc-200 px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold dark:bg-zinc-800;
+}
 :root:has(.no-doc-scroll) {
   overflow: hidden;
 }

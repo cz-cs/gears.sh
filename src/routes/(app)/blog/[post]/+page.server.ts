@@ -11,7 +11,8 @@ export const load: PageServerLoad = async ({ cookies, params }) => {
   try {
     let doc = await db.getDocument(PUBLIC_DATABASE, PUBLIC_BLOGCOLLECTION, params.post);
     return {
-      html: doc.html as string,
+      content: doc.content as string,
+      title: doc.title as string,
       author: doc.author as string
     };
   } catch {
