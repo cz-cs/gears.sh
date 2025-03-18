@@ -12,6 +12,7 @@
   import 'dayjs/locale/zh';
   import LocalizedFormat from 'dayjs/plugin/localizedFormat';
   import { languageTag } from '$lib/paraglide/runtime';
+  import { Toaster } from 'svelte-sonner';
 
   let { children } = $props();
 
@@ -21,6 +22,7 @@
   dayjs.extend(LocalizedFormat);
 </script>
 
+<Toaster />
 <div class="h-full text-zinc-50 antialiased dark:bg-zinc-950">
   {#if !worldsDismissed}
     <div
