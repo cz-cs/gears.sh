@@ -16,7 +16,7 @@
   <title>Competitions - gears</title>
 </svelte:head>
 <Container>
-  <Title><GradientText>{data.events[0].name}</GradientText></Title>
+  <Title>Competition finder</Title>
   <div role="separator" class="my-6 h-px shrink-0 bg-zinc-800"></div>
   <div class="relative flex flex-col gap-3 md:flex-row">
     <div class="sticky top-0 w-full space-y-3 md:w-1/4">

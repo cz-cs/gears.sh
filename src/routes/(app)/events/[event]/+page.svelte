@@ -52,10 +52,9 @@
     event.location.region !== null ? `, ${event.location.region}` : ''
   }`}
   <Container>
-    {#if event.name.includes('World Championship')}
-      <GradientText
-        colors={['#4287f5', '#ff0000', '#ffffff', '#ff0000', '#ffffff', '#4287f5']}
-        extraProps="scroll-m-20 text-2xl font-bold tracking-tight mb-3">{event.name}</GradientText
+    {#if event.name.includes('World Championship') || event.name.includes('Open')}
+      <GradientText extraProps="scroll-m-20 text-2xl font-bold tracking-tight mb-3"
+        >{event.name}</GradientText
       >
     {:else}
       <Title extraProps="mb-3">{event.name}</Title>
