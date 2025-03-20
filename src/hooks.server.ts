@@ -5,15 +5,16 @@ import { redirect, type Handle } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';
 const clientHandle: Handle = async ({ resolve, event }) => {
   let cookie = event.cookies.get(PUBLIC_SESSIONCOOKIE);
-  if (cookie && event.route.id?.includes('(app)')) {
+  console.log(cookie === undefined && event.route.id?.includes('(auth)'));
+  if (cookie) {
     let client = createSessionClient(event.cookies);
     event.locals.client = client;
-    return await resolve(event);
-  } else if (cookie && !event.route.id?.includes('(app)')) {
-    redirect(303, '/');
-  } else if (!cookie && event.route.id?.includes('(app)')) {
-    redirect(303, '/signup');
   }
+
+  if (cookie !== undefined && (event.route.id === null || event.route.id === '/')) {
+    redirect(303, '/home');
+  }
+
   return await resolve(event);
 };
 const i18nHandle: Handle = i18n.handle();
