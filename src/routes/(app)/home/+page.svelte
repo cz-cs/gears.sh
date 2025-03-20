@@ -17,7 +17,7 @@
 </svelte:head>
 <Container>
   <Title>{m.tiny_tame_parrot_twist()}</Title>
-  <div role="separator" class="my-6 h-px shrink-0 bg-zinc-800"></div>
+  <div role="separator" class="my-6 h-px shrink-0 bg-zinc-200 dark:bg-zinc-800"></div>
   <div class="mb-3 space-y-3">
     <Section>{m.fluffy_blue_chipmunk_drum()}</Section>
     {#await data.events}

@@ -23,7 +23,7 @@
 </script>
 
 <Toaster />
-<div class="h-full text-zinc-50 antialiased dark:bg-zinc-950">
+<div class="min-h-screen bg-zinc-50 text-zinc-950 antialiased dark:bg-zinc-950 dark:text-zinc-50">
   {#if !worldsDismissed}
     <div
       out:fly={{ y: -50 }}
@@ -50,7 +50,7 @@
     {#if navigating.to}
       <div class="flex min-h-screen w-full">
         <div class="m-auto">
-          <BlockSpinner size={24} fill="#FFFFFF" active={true} />
+          <BlockSpinner active={true} />
         </div>
       </div>
     {:else}
