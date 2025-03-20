@@ -31,6 +31,7 @@
     "@vercel/speed-insights": "^1.1.0",
     "appwrite": "^16.1.0",
     "dayjs": "^1.11.13",
+    "marked": "^15.0.7",
     "node-appwrite": "^14.1.0",
     "svelte-sonner": "^0.3.28"
   }
