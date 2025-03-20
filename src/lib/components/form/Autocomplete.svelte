@@ -37,13 +37,12 @@
     {required}
     bind:value={input}
     {disabled}
-    class="flex h-9 rounded-md border border-zinc-800 px-4 py-2 text-xs font-medium shadow-sm ring-zinc-50 transition-shadow duration-300 outline-none placeholder:text-zinc-400 focus-visible:ring-2 focus-visible:ring-offset-2 data-[error=true]:ring-2 data-[error=true]:ring-red-600 dark:focus-visible:ring-offset-zinc-950 {extraProps}"
+    class="flex h-9 rounded-md border border-zinc-200 px-4 py-2 text-xs font-medium shadow-sm ring-zinc-50 transition-shadow duration-300 outline-none placeholder:text-zinc-400 focus-visible:ring-2 focus-visible:ring-offset-2 data-[error=true]:ring-2 data-[error=true]:ring-red-600 dark:border-zinc-800 dark:focus-visible:ring-offset-zinc-950 {extraProps}"
   />
   {#if open}
-    <!-- filepath: c:\Users\dpere\projects\TS\gears.sh\src\lib\components\form\Autocomplete.svelte -->
     <div
       in:fly={{ y: -10, duration: 300 }}
-      class="absolute bottom-12 z-50 flex max-h-64 w-full flex-col overflow-y-auto rounded-md border border-zinc-800 bg-zinc-50 p-1 dark:bg-zinc-950"
+      class="absolute bottom-12 z-50 flex max-h-64 w-full flex-col overflow-y-auto rounded-md border border-zinc-200 bg-zinc-50 p-1 shadow dark:border-zinc-800 dark:bg-zinc-950"
     >
       {#if options.length === 0 && open}
         <button

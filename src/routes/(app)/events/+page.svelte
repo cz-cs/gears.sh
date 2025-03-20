@@ -91,7 +91,7 @@
 </svelte:head>
 <Container>
   <Title>Competitions</Title>
-  <div role="separator" class="my-6 h-px shrink-0 bg-zinc-800"></div>
+  <div role="separator" class="my-6 h-px shrink-0 bg-zinc-200 dark:bg-zinc-800"></div>
   <div class="flex flex-col gap-0 md:flex-row md:gap-3">
     <div class="min-h-screen w-full md:w-1/4">
       <div class="sticky top-4 space-y-3">

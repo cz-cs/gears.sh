@@ -31,7 +31,7 @@
   role="navigation"
   class="fixed right-5 bottom-5 left-5 z-40 flex justify-center gap-2 rounded-full border border-zinc-200 bg-zinc-50 p-2 shadow lg:sticky lg:top-0 lg:right-0 lg:bottom-0 lg:left-0 lg:h-screen lg:w-auto lg:flex-col lg:justify-start lg:rounded-none lg:border-y-0 lg:border-r lg:border-l-0 lg:shadow-none lg:backdrop-blur-none dark:border-zinc-800 dark:bg-zinc-950 dark:backdrop-blur-md"
 >
-  <NavLink label="Home" active={page.route.id! == '/(app)'} href="/">
+  <NavLink label="Home" active={page.route.id! == '/(app)/home'} href="/home">
     <Home />
   </NavLink>
   <NavLink label="Competitions" active={page.route.id!.includes('/events')} href="/events">

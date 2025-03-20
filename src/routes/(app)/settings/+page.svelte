@@ -50,7 +50,9 @@
     out:scale={{ start: 0.95, easing: quadIn, duration: 100 }}
     class="no-doc-scroll fixed top-0 right-0 bottom-0 left-0 z-50 flex h-full flex-col bg-zinc-950/70 backdrop-blur-sm"
   >
-    <div class="m-auto flex flex-col rounded-md border border-zinc-800 bg-zinc-950 p-4">
+    <div
+      class="m-auto flex flex-col rounded-md border border-zinc-200 bg-zinc-50 p-4 dark:border-zinc-800 dark:bg-zinc-950"
+    >
       <p class="mb-3 text-lg font-semibold">Are you sure you want to sign out?</p>
       <div class="flex flex-col justify-stretch gap-2 md:flex-row">
         <LinkOutline extraProps="w-full" href="/settings/signout">Yes</LinkOutline>

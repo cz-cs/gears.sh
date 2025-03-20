@@ -24,7 +24,7 @@
 <div class="relative">
   <button
     onclick={() => (open = !open)}
-    class="inline-flex h-9 w-full items-center justify-between rounded-md border border-zinc-800 px-4 py-2 text-sm font-medium shadow-sm ring-zinc-50 transition-all duration-300 outline-none placeholder:text-zinc-400 hover:cursor-pointer focus-visible:ring-2 focus-visible:ring-offset-2 dark:hover:bg-zinc-800 dark:focus-visible:ring-offset-zinc-950"
+    class="inline-flex h-9 w-full items-center justify-between rounded-md border border-zinc-200 px-4 py-2 text-sm font-medium shadow-sm ring-zinc-50 transition-all duration-300 outline-none placeholder:text-zinc-400 hover:cursor-pointer focus-visible:ring-2 focus-visible:ring-offset-2 dark:border-zinc-800 dark:hover:bg-zinc-800 dark:focus-visible:ring-offset-zinc-950"
   >
     {display}
     <ChevronDown />
@@ -32,7 +32,7 @@
   {#if open}
     <div
       in:fly={{ y: -10, duration: 300 }}
-      class="absolute top-10 z-50 flex w-full flex-col rounded-md border border-zinc-800 bg-zinc-50 p-1 dark:bg-zinc-950"
+      class="absolute top-10 z-50 flex w-full flex-col rounded-md border border-zinc-200 bg-zinc-50 p-1 dark:border-zinc-800 dark:bg-zinc-950"
     >
       {#each options as option}
         <button

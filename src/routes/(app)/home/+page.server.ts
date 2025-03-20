@@ -1,5 +1,5 @@
 import { Events } from '$lib/robotevents/api';
-import type { PageServerLoad } from '../$types';
+import type { PageServerLoad } from './$types';
 import type { Paginated } from '$lib/robotevents/schemas/Paginated';
 import { Account, Teams } from 'node-appwrite';
 import type { Event } from '$lib/robotevents/schemas/Event';
