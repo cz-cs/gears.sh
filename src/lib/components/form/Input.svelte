@@ -1,6 +1,5 @@
 <script lang="ts">
   import type { FormEventHandler, KeyboardEventHandler } from 'svelte/elements';
-
   let {
     name = '',
     value = $bindable(''),

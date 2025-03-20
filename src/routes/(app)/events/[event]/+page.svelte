@@ -52,7 +52,7 @@
     event.location.region !== null ? `, ${event.location.region}` : ''
   }`}
   <Container>
-    {#if event.name.includes('World Championship') || event.name.includes('Open')}
+    {#if event.level === 'World' || event.name.includes('Open') || event.level === 'Signature'}
       <GradientText extraProps="scroll-m-20 text-2xl font-bold tracking-tight mb-3"
         >{event.name}</GradientText
       >
