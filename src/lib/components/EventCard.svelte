@@ -19,7 +19,7 @@
   class="flex flex-col gap-1 rounded-lg border border-zinc-200 bg-zinc-50 p-3 text-sm transition-colors duration-300 hover:bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-950 dark:hover:bg-zinc-900"
   href="/events/{event.id}"
 >
-  {#if event.name.includes('World Championship') || event.name.includes('Open')}
+  {#if event.level === 'World' || event.name.includes('Open') || event.level === 'Signature'}
     <GradientText extraProps="font-medium">{event.name}</GradientText>
   {:else}
     <p class="font-medium">{event.name}</p>

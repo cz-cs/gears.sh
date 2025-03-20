@@ -10,6 +10,7 @@
   import { page } from '$app/state';
   import Filter from './components/Filter.svelte';
   import Outline from '$lib/components/button/Outline.svelte';
+  import { untrack } from 'svelte';
 
   let { data } = $props();
 
