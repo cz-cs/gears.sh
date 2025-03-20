@@ -20,6 +20,7 @@
   import Row from '$lib/components/info/table/Row.svelte';
   import Head from '$lib/components/info/table/Head.svelte';
   import { isActionFailure } from '@sveltejs/kit';
+  import GradientText from '$lib/components/GradientText.svelte';
 
   let { data } = $props();
 
@@ -51,7 +52,13 @@
     event.location.region !== null ? `, ${event.location.region}` : ''
   }`}
   <Container>
-    <Title extraProps="mb-3">{event.name}</Title>
+    {#if event.level === 'World' || event.name.includes('Open') || event.level === 'Signature'}
+      <GradientText extraProps="scroll-m-20 text-2xl font-bold tracking-tight mb-3"
+        >{event.name}</GradientText
+      >
+    {:else}
+      <Title extraProps="mb-3">{event.name}</Title>
+    {/if}
     <div class="mb-6 grid grid-cols-2 gap-2">
       <Card
         href={`http://maps.apple.com/?t=r&q=${event.location.venue}&address=${fullAddress}`}

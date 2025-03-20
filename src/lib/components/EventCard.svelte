@@ -5,6 +5,7 @@
   import { languageTag } from '$lib/paraglide/runtime';
   import dayjs from 'dayjs';
   import localizedFormat from 'dayjs/plugin/localizedFormat';
+  import GradientText from './GradientText.svelte';
 
   let { ...event }: Event = $props();
 
@@ -18,9 +19,11 @@
   class="flex flex-col gap-1 rounded-lg border border-zinc-800 bg-zinc-950 p-3 text-sm transition-colors duration-300 hover:bg-zinc-900"
   href="/events/{event.id}"
 >
-  <p class="font-medium">
-    {event.name}
-  </p>
+  {#if event.name.includes('World Championship') || event.name.includes('Open')}
+    <GradientText extraProps="font-medium">{event.name}</GradientText>
+  {:else}
+    <p class="font-medium">{event.name}</p>
+  {/if}
   <div class="flex gap-2">
     <div class="flex items-center gap-1">
       <CalendarDays />

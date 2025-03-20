@@ -2,6 +2,18 @@
 @import 'tailwindcss';
 @theme {
   --default-font-family: 'Funnel Sans';
+  --animate-gradient: gradient 8s linear infinite;
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
 }
 :root:has(.no-doc-scroll) {
   overflow: hidden;
