@@ -1,6 +1,5 @@
 <script lang="ts">
   import regions from '$lib/regions';
-  import type { FormEventHandler, KeyboardEventHandler } from 'svelte/elements';
   import { fly } from 'svelte/transition';
   let {
     name = '',
@@ -26,6 +25,10 @@
     return regions.filter((region) => region.toLowerCase().includes(input.toLowerCase()));
   });
   let open = $derived(options.length > 0 && input.length > 0 && input !== value);
+
+  $effect(() => {
+    if (input === '') value = '';
+  });
 </script>
 
 <div class="relative">

@@ -16,7 +16,7 @@
   <title>{data.title} - gears</title>
 </svelte:head>
 <Container extraProps="flex flex-col">
-  <div class="mx-auto w-1/2">
+  <div class="md:mx-auto md:w-1/2">
     <div class="md">
       {@html html}
     </div>

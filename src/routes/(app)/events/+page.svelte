@@ -9,6 +9,7 @@
   import Primary from '$lib/components/button/Primary.svelte';
   import { page } from '$app/state';
   import Filter from './components/Filter.svelte';
+  import Outline from '$lib/components/button/Outline.svelte';
 
   let { data } = $props();
 
@@ -93,8 +94,8 @@
   <Title>Competitions</Title>
   <div role="separator" class="my-6 h-px shrink-0 bg-zinc-200 dark:bg-zinc-800"></div>
   <div class="flex flex-col gap-0 md:flex-row md:gap-3">
-    <div class="min-h-screen w-full md:w-1/4">
-      <div class="sticky top-4 space-y-3">
+    <div class="w-full md:min-h-screen md:w-1/4">
+      <div class="space-y-3 md:sticky md:top-4">
         <Filter label="Program">
           <Picker
             placeholder="Program"
@@ -102,10 +103,7 @@
             options={[
               ['VEX IQ', '41'],
               ['VEX V5', '1'],
-              ['VEX U', '4'],
-              ['FIRST Tech Challenge', 'ftc'],
-              ['FIRST Robotics Competiton', 'frc'],
-              ['FIRST LEGO League', 'fll']
+              ['VEX U', '4']
             ]}
           />
         </Filter>
@@ -114,7 +112,7 @@
             placeholder="Class"
             bind:value={level}
             options={[
-              ['All', 'Other'],
+              ['All', ''],
               ['Signature', 'Signature'],
               ['National', 'National'],
               ['Regional', 'State'],
@@ -147,6 +145,10 @@
         >
       </div>
     </div>
+    <div
+      role="separator"
+      class="my-6 h-px shrink-0 bg-zinc-200 md:my-0 md:h-0 dark:bg-zinc-800"
+    ></div>
     <div class="flex w-full flex-col gap-3">
       {#each data.events as event}
         <EventCard {...event} />

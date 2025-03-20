@@ -6,8 +6,8 @@ export const load: PageServerLoad = async ({ url }) => {
   let params = url.searchParams;
 
   let events = await Events({
-    region: params.get('region') ?? '',
-    level: [params.get('level') ?? ''],
+    region: params.get('region') ?? undefined,
+    level: params.get('level')?.trim() ? [params.get('level')!] : undefined,
     season: params.get('season') ? [parseInt(params.get('season')!)] : undefined,
     start: params.get('from')
       ? dayjs(params.get('from')).toISOString()

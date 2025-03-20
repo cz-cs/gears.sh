@@ -21,6 +21,11 @@
   );
 </script>
 
+<svelte:window
+  onclickcapture={() => {
+    if (open) open = false;
+  }}
+/>
 <div class="relative">
   <button
     onclick={() => (open = !open)}

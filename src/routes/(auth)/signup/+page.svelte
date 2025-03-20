@@ -23,6 +23,8 @@
   let team = $state(m.same_each_puffin_enchant());
   let program = $state('');
 
+  let teamLoading = $state(false);
+
   let { form }: { form: ActionData } = $props();
 </script>
 
@@ -192,9 +194,6 @@
     </div>
   {:else if page === 3}
     {@const special = /[$&+,:;=?@#|'<>.^*()%!-]/}
-    <form action="?/team" id="teamform" oninput={(e) => e.currentTarget.requestSubmit()}>
-      <input aria-hidden="true" hidden name="team_number" bind:value={data[4]} />
-    </form>
     <div in:fly={{ x: 15 }}>
       <div class="mb-6 space-y-2 text-center">
         <h1 class="text-2xl font-bold">{m.mild_wise_badger_embrace()}</h1>
@@ -204,15 +203,22 @@
         placeholder={m.fit_dull_frog_treasure()}
         extraProps="uppercase placeholder:normal-case w-full mb-1"
         oninput={async (e) => {
+          if (team == m.few_tasty_antelope_pray() || data[4] === '') {
+            return;
+          }
+
           program = '';
           team = m.few_tasty_antelope_pray();
           let res = await fetch(`/api/team?n=${data[4]}`);
+
           if (!res.ok) {
             program = 'not found';
             team = m.north_every_gorilla_race();
             return;
           }
+
           let t = await res.json();
+
           program = t.program;
           team = `${t.number} - ${t.name}: ${t.members === 0 ? m.awful_deft_panther_startle() : m.north_day_guppy_treasure({ members: t.members })}`;
         }}
@@ -227,7 +233,7 @@
         <p class="text-xs font-medium">{team}</p>
       </div>
       <Button form="form" extraProps="w-full"
-        ><BlockSpinner active={loading} size={4} fill="#09090b" />
+        ><BlockSpinner active={loading} fill="#09090b" />
         <p>{m.gaudy_tame_moth_embrace()}</p></Button
       >
     </div>
