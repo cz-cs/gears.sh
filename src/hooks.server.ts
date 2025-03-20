@@ -5,13 +5,13 @@ import { redirect, type Handle } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';
 const clientHandle: Handle = async ({ resolve, event }) => {
   let cookie = event.cookies.get(PUBLIC_SESSIONCOOKIE);
-  console.log(event.route.id);
+  console.log(cookie === undefined && event.route.id?.includes('(auth)'));
   if (cookie) {
     let client = createSessionClient(event.cookies);
     event.locals.client = client;
   }
 
-  if (cookie && event.route.id === null) {
+  if (cookie !== undefined && (event.route.id === null || event.route.id === '/')) {
     redirect(303, '/home');
   }
 
