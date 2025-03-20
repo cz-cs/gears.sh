@@ -13,8 +13,11 @@
   import Input from '$lib/components/form/Input.svelte';
   import { quadIn } from 'svelte/easing';
   import Outline from '$lib/components/button/Outline.svelte';
+  import { toast } from 'svelte-sonner';
 
   let { data, form } = $props();
+
+  let dark = $state(true);
 
   let page = $state(1);
 
@@ -30,6 +33,10 @@
     untrack(() => {
       setTimeout(() => (form = null), 5000);
     });
+  });
+
+  $effect(() => {
+    dark = document.documentElement.classList.contains('dark');
   });
 </script>
 
@@ -51,24 +58,6 @@
     </div>
   </div>
 {/if}
-{#if form?.message}
-  {#if form.error}
-    <div
-      transition:fly={{ x: 30 }}
-      class="fixed top-4 right-4 left-4 flex gap-2 rounded-md border border-red-800 bg-red-950/80 px-4 py-2 shadow-sm backdrop-blur-sm md:top-auto md:bottom-4 md:left-auto"
-    >
-      <AlertTriangle />
-      <p class="text-xs font-medium text-red-50">{form.message}</p>
-    </div>
-  {:else}
-    <div
-      transition:fly={{ x: 30 }}
-      class="absolute right-4 bottom-4 flex gap-2 rounded-md border border-green-800 bg-green-950 px-4 py-2"
-    >
-      <p class="text-xs font-medium text-green-50">{form.message}</p>
-    </div>
-  {/if}
-{/if}
 <Container>
   <Title extraProps="mb-1">Settings</Title>
   <p class="text-zinc-400">
@@ -86,39 +75,6 @@
         <Section>Account Settings</Section>
         <p class="mb-6 text-sm font-medium text-zinc-400">How you appear to other people</p>
         <div class="space-y-2">
-          <form
-            method="post"
-            action="?/name"
-            id="name"
-            use:enhance={({ formData, cancel }) => {
-              formData.forEach((x) => {
-                if (x.toString().length === 0) {
-                  cancel();
-                  return;
-                }
-              });
-              submitting = true;
-              return async ({ result }) => {
-                submitting = false;
-                await applyAction(result);
-              };
-            }}
-          >
-            <input
-              aria-hidden="true"
-              autocomplete="off"
-              hidden
-              name="username"
-              bind:value={username}
-            />
-            <input
-              aria-hidden="true"
-              autocomplete="off"
-              hidden
-              name="display_name"
-              bind:value={displayName}
-            />
-          </form>
           <div class="space-y-2">
             <div class="flex flex-col gap-2 text-xs font-medium md:text-sm">
               Username
@@ -137,27 +93,6 @@
         </div>
         <div role="separator" class="my-3 h-px bg-zinc-800"></div>
         <div class="space-y-2">
-          <form
-            method="post"
-            action="?/email"
-            id="email"
-            use:enhance={({}) => {
-              submitting = true;
-              return async ({ result }) => {
-                submitting = false;
-                await applyAction(result);
-              };
-            }}
-          >
-            <input
-              aria-hidden="true"
-              autocomplete="off"
-              type="email"
-              hidden
-              name="email"
-              bind:value={email}
-            />
-          </form>
           <div class="flex flex-col gap-2 text-xs font-medium md:text-sm">
             Email
             <div class="flex gap-2">
@@ -208,3 +143,56 @@
     {/if}
   </div>
 </Container>
+<form
+  method="post"
+  action="?/email"
+  id="email"
+  use:enhance={({}) => {
+    submitting = true;
+    return async ({ result }) => {
+      toast.success('Email updated successfully.', { invert: dark });
+      submitting = false;
+      await applyAction(result);
+    };
+  }}
+>
+  <input
+    aria-hidden="true"
+    autocomplete="off"
+    type="email"
+    hidden
+    name="email"
+    bind:value={email}
+  />
+</form>
+<form
+  method="post"
+  action="?/name"
+  id="name"
+  use:enhance={({ formData, cancel }) => {
+    submitting = true;
+    formData.forEach((x) => {
+      if (x.toString().length === 0) {
+        toast.error("Please don't leave anything blank.", {
+          invert: dark
+        });
+        submitting = false;
+        cancel();
+      }
+    });
+    return async ({ result }) => {
+      submitting = false;
+      toast.success('Settings applied successfully.', { invert: dark });
+      await applyAction(result);
+    };
+  }}
+>
+  <input aria-hidden="true" autocomplete="off" hidden name="username" bind:value={username} />
+  <input
+    aria-hidden="true"
+    autocomplete="off"
+    hidden
+    name="display_name"
+    bind:value={displayName}
+  />
+</form>
